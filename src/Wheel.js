@@ -12,7 +12,7 @@ export class Wheel {
                 { text: '200', value: 200, color: '#9b59b6', textColor: '#fff' },
                 { text: '1500', value: 1500, color: '#27ae60', textColor: '#fff' }, // Bonus instead of PASSA
                 { text: '500', value: 500, color: '#3498db', textColor: '#fff' },
-                { text: '100', value: 100, color: '#e67e22', textColor: '#fff' },
+                { text: 'PERDE', value: 0, color: '#e74c3c', textColor: '#fff' },
                 { text: '2000', value: 2000, color: '#2ecc71', textColor: '#000' },
                 { text: '300', value: 300, color: '#1abc9c', textColor: '#fff' },
                 { text: 'PERDE', value: 0, color: '#e74c3c', textColor: '#fff' },

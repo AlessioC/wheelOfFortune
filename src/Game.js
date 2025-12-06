@@ -96,10 +96,12 @@ export class Game {
         const randomCatIndex = Math.floor(Math.random() * categories.length);
         this.currentCategory = categories[randomCatIndex];
 
-        // Pick random phrase
+        // Pick random phrase (now an object with phrase and hint)
         const phrases = phrasesData[this.currentCategory];
         const randomPhraseIndex = Math.floor(Math.random() * phrases.length);
-        this.currentPhrase = phrases[randomPhraseIndex].toUpperCase();
+        const selectedItem = phrases[randomPhraseIndex];
+        this.currentPhrase = selectedItem.phrase.toUpperCase();
+        this.currentHint = selectedItem.hint || this.currentCategory; // Fallback to category
 
         // Reset round state (but keep player scores in multi)
         this.guessedLetters.clear();
@@ -114,7 +116,7 @@ export class Game {
         this.backToMenuBtn.style.display = 'none';
 
         // UI Updates
-        this.categoryElement.textContent = this.currentCategory;
+        this.categoryElement.textContent = this.currentHint; // Now shows hint instead of category
         this.board.setPuzzle(this.currentPhrase);
         this.updatePlayerDisplay();
         this.setMessage("Gira la ruota per iniziare!");

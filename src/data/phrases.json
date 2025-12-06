@@ -1,61 +1,950 @@
 {
     "FILM": [
-        "LA VITA E BELLA",
-        "IL GLADIATORE",
-        "NUOVO CINEMA PARADISO",
-        "LA DOLCE VITA",
-        "IL PADRINO",
-        "TITANIC",
-        "FORREST GUMP",
-        "RITORNO AL FUTURO",
-        "GUERRE STELLARI",
-        "MATRIX"
+        {
+            "phrase": "LA VITA E BELLA",
+            "hint": "FILM - Oscar italiano anni '90"
+        },
+        {
+            "phrase": "IL GLADIATORE",
+            "hint": "FILM - Epico, antica Roma"
+        },
+        {
+            "phrase": "NUOVO CINEMA PARADISO",
+            "hint": "FILM - Italiano, nostalgia"
+        },
+        {
+            "phrase": "LA DOLCE VITA",
+            "hint": "FILM - Classico anni '60"
+        },
+        {
+            "phrase": "IL PADRINO",
+            "hint": "FILM - Mafia, trilogia leggendaria"
+        },
+        {
+            "phrase": "TITANIC",
+            "hint": "FILM - Transatlantico, 1997"
+        },
+        {
+            "phrase": "FORREST GUMP",
+            "hint": "FILM - Tom Hanks, storia americana"
+        },
+        {
+            "phrase": "RITORNO AL FUTURO",
+            "hint": "FILM - Viaggio temporale, anni '80"
+        },
+        {
+            "phrase": "GUERRE STELLARI",
+            "hint": "FILM - Saga spaziale"
+        },
+        {
+            "phrase": "MATRIX",
+            "hint": "FILM - Fantascienza, realtà virtuale"
+        },
+        {
+            "phrase": "IL SIGNORE DEGLI ANELLI",
+            "hint": "FILM - Fantasy, trilogia epica"
+        },
+        {
+            "phrase": "HARRY POTTER",
+            "hint": "FILM - Magia, saga per ragazzi"
+        },
+        {
+            "phrase": "JURASSIC PARK",
+            "hint": "FILM - Spielberg, preistoria"
+        },
+        {
+            "phrase": "PULP FICTION",
+            "hint": "FILM - Tarantino, crime"
+        },
+        {
+            "phrase": "INCEPTION",
+            "hint": "FILM - Nolan, mente umana"
+        },
+        {
+            "phrase": "INTERSTELLAR",
+            "hint": "FILM - Spazio, padre e figlia"
+        },
+        {
+            "phrase": "AVATAR",
+            "hint": "FILM - Cameron, pianeta alieno"
+        },
+        {
+            "phrase": "IL SESTO SENSO",
+            "hint": "FILM - Thriller psicologico, colpo di scena"
+        },
+        {
+            "phrase": "SHREK",
+            "hint": "FILM - Animazione, fiaba rovesciata"
+        },
+        {
+            "phrase": "TOY STORY",
+            "hint": "FILM - Pixar, infanzia"
+        },
+        {
+            "phrase": "ALLA RICERCA DI NEMO",
+            "hint": "FILM - Animazione, oceano"
+        },
+        {
+            "phrase": "IL RE LEONE",
+            "hint": "FILM - Disney, Africa"
+        },
+        {
+            "phrase": "FROZEN IL REGNO DI GHIACCIO",
+            "hint": "FILM - Disney, principesse, inverno"
+        },
+        {
+            "phrase": "COCO",
+            "hint": "FILM - Pixar, tradizioni messicane"
+        },
+        {
+            "phrase": "INSIDE OUT",
+            "hint": "FILM - Pixar, psicologia"
+        },
+        {
+            "phrase": "UP",
+            "hint": "FILM - Pixar, avventura aerea"
+        },
+        {
+            "phrase": "WALL E",
+            "hint": "FILM - Pixar, futuro distopico"
+        },
+        {
+            "phrase": "RATATOUILLE",
+            "hint": "FILM - Pixar, cucina francese"
+        },
+        {
+            "phrase": "GLI INCREDIBILI",
+            "hint": "FILM - Pixar, famiglia speciale"
+        },
+        {
+            "phrase": "MONSTERS E CO",
+            "hint": "FILM - Pixar, mondo parallelo"
+        },
+        {
+            "phrase": "LA BELLA E LA BESTIA",
+            "hint": "FILM - Disney, fiaba romantica"
+        },
+        {
+            "phrase": "ALADDIN",
+            "hint": "FILM - Disney, Medio Oriente"
+        },
+        {
+            "phrase": "LA SIRENETTA",
+            "hint": "FILM - Disney, mare"
+        },
+        {
+            "phrase": "BIANCANEVE E I SETTE NANI",
+            "hint": "FILM - Disney, primo lungometraggio"
+        },
+        {
+            "phrase": "CENERENTOLA",
+            "hint": "FILM - Disney, fiaba classica"
+        },
+        {
+            "phrase": "PINOCCHIO",
+            "hint": "FILM - Disney, favola italiana"
+        },
+        {
+            "phrase": "MISSION IMPOSSIBLE",
+            "hint": "FILM - Azione, spionaggio"
+        },
+        {
+            "phrase": "JAMES BOND",
+            "hint": "FILM - Agente segreto britannico"
+        },
+        {
+            "phrase": "ROCKY",
+            "hint": "FILM - Pugilato, underdog"
+        },
+        {
+            "phrase": "TERMINATOR",
+            "hint": "FILM - Fantascienza, Schwarzenegger"
+        },
+        {
+            "phrase": "ALIEN",
+            "hint": "FILM - Fantascienza, horror spaziale"
+        },
+        {
+            "phrase": "BLADE RUNNER",
+            "hint": "FILM - Fantascienza, noir"
+        },
+        {
+            "phrase": "E T L EXTRATERRESTRE",
+            "hint": "FILM - Spielberg, amicizia aliena"
+        },
+        {
+            "phrase": "LO SQUALO",
+            "hint": "FILM - Spielberg, terrore marino"
+        },
+        {
+            "phrase": "INDIANA JONES",
+            "hint": "FILM - Avventura, archeologia"
+        },
+        {
+            "phrase": "PIRATI DEI CARAIBI",
+            "hint": "FILM - Avventura, mare"
+        },
+        {
+            "phrase": "SPIDER MAN",
+            "hint": "FILM - Supereroi, Marvel"
+        },
+        {
+            "phrase": "IRON MAN",
+            "hint": "FILM - Supereroi, tecnologia"
+        },
+        {
+            "phrase": "AVENGERS ENDGAME",
+            "hint": "FILM - Supereroi, finale saga"
+        },
+        {
+            "phrase": "BATMAN",
+            "hint": "FILM - Supereroi, DC Comics"
+        },
+        {
+            "phrase": "JOKER",
+            "hint": "FILM - Villain, Oscar 2020"
+        }
     ],
     "PROVERBI": [
-        "CHI DORME NON PIGLIA PESCI",
-        "ROSSO DI SERA BEL TEMPO SI SPERA",
-        "A CAVAL DONATO NON SI GUARDA IN BOCCA",
-        "CHI FA DA SE FA PER TRE",
-        "TENTAR NON NUOCE",
-        "RIDE BENE CHI RIDE ULTIMO",
-        "L ABITO NON FA IL MONACO",
-        "TRA IL DIRE E IL FARE C E DI MEZZO IL MARE",
-        "MEGLIO TARDI CHE MAI"
+        {
+            "phrase": "CHI DORME NON PIGLIA PESCI",
+            "hint": "PROVERBIO - Inattività e risultati"
+        },
+        {
+            "phrase": "ROSSO DI SERA BEL TEMPO SI SPERA",
+            "hint": "PROVERBIO - Meteo popolare"
+        },
+        {
+            "phrase": "A CAVAL DONATO NON SI GUARDA IN BOCCA",
+            "hint": "PROVERBIO - Gratitudine"
+        },
+        {
+            "phrase": "CHI FA DA SE FA PER TRE",
+            "hint": "PROVERBIO - Autonomia"
+        },
+        {
+            "phrase": "TENTAR NON NUOCE",
+            "hint": "PROVERBIO - Coraggio"
+        },
+        {
+            "phrase": "RIDE BENE CHI RIDE ULTIMO",
+            "hint": "PROVERBIO - Pazienza"
+        },
+        {
+            "phrase": "L ABITO NON FA IL MONACO",
+            "hint": "PROVERBIO - Apparenze"
+        },
+        {
+            "phrase": "TRA IL DIRE E IL FARE C E DI MEZZO IL MARE",
+            "hint": "PROVERBIO - Parole e azioni"
+        },
+        {
+            "phrase": "MEGLIO TARDI CHE MAI",
+            "hint": "PROVERBIO - Tempismo"
+        },
+        {
+            "phrase": "CHI LA DURA LA VINCE",
+            "hint": "PROVERBIO - Perseveranza"
+        },
+        {
+            "phrase": "IL MATTINO HA L ORO IN BOCCA",
+            "hint": "PROVERBIO - Svegliarsi presto"
+        },
+        {
+            "phrase": "OGNI LASCIATA E PERSA",
+            "hint": "PROVERBIO - Occasioni"
+        },
+        {
+            "phrase": "CHI TROVA UN AMICO TROVA UN TESORO",
+            "hint": "PROVERBIO - Amicizia"
+        },
+        {
+            "phrase": "L UNIONE FA LA FORZA",
+            "hint": "PROVERBIO - Collaborazione"
+        },
+        {
+            "phrase": "TUTTO E BENE QUEL CHE FINISCE BENE",
+            "hint": "PROVERBIO - Finale"
+        },
+        {
+            "phrase": "SBAGLIANDO SI IMPARA",
+            "hint": "PROVERBIO - Errori"
+        },
+        {
+            "phrase": "LA GATTA FRETTOLOSA FA I GATTINI CIECHI",
+            "hint": "PROVERBIO - Fretta"
+        },
+        {
+            "phrase": "NON TUTTE LE CIAMBELLE RIESCONO COL BUCO",
+            "hint": "PROVERBIO - Imperfezione"
+        },
+        {
+            "phrase": "CHI TROPPO VUOLE NULLA STRINGE",
+            "hint": "PROVERBIO - Avidità"
+        },
+        {
+            "phrase": "OCCHIO NON VEDE CUORE NON DUOLE",
+            "hint": "PROVERBIO - Ignoranza"
+        },
+        {
+            "phrase": "L ERBA DEL VICINO E SEMPRE PIU VERDE",
+            "hint": "PROVERBIO - Invidia"
+        },
+        {
+            "phrase": "UNA MELA AL GIORNO TOGLIE IL MEDICO DI TORNO",
+            "hint": "PROVERBIO - Salute"
+        },
+        {
+            "phrase": "IL LUPO PERDE IL PELO MA NON IL VIZIO",
+            "hint": "PROVERBIO - Natura"
+        },
+        {
+            "phrase": "CAN CHE ABBAIA NON MORDE",
+            "hint": "PROVERBIO - Minacce vuote"
+        },
+        {
+            "phrase": "PAESE CHE VAI USANZA CHE TROVI",
+            "hint": "PROVERBIO - Tradizioni"
+        },
+        {
+            "phrase": "IN BOCCA AL LUPO",
+            "hint": "PROVERBIO - Augurio"
+        },
+        {
+            "phrase": "A BUON INTENDITOR POCHE PAROLE",
+            "hint": "PROVERBIO - Comprensione"
+        },
+        {
+            "phrase": "CHI TARDI ARRIVA MALE ALLOGGIA",
+            "hint": "PROVERBIO - Puntualità"
+        },
+        {
+            "phrase": "NON C E DUE SENZA TRE",
+            "hint": "PROVERBIO - Ripetizione"
+        },
+        {
+            "phrase": "L APPETITO VIEN MANGIANDO",
+            "hint": "PROVERBIO - Desiderio crescente"
+        },
+        {
+            "phrase": "LA FORTUNA AIUTA GLI AUDACI",
+            "hint": "PROVERBIO - Coraggio"
+        },
+        {
+            "phrase": "IL TEMPO E DENARO",
+            "hint": "PROVERBIO - Valore del tempo"
+        },
+        {
+            "phrase": "MEGLIO SOLI CHE MALE ACCOMPAGNATI",
+            "hint": "PROVERBIO - Compagnia"
+        },
+        {
+            "phrase": "LA CALMA E LA VIRTU DEI FORTI",
+            "hint": "PROVERBIO - Pazienza"
+        }
     ],
-    "CITTÀ": [
-        "ROMA",
-        "MILANO",
-        "VENEZIA",
-        "FIRENZE",
-        "NAPOLI",
-        "TORINO",
-        "PALERMO",
-        "BOLOGNA",
-        "GENOVA",
-        "BARI"
+    "CITTA": [
+        {
+            "phrase": "ROMA",
+            "hint": "CITTÀ - Capitale italiana"
+        },
+        {
+            "phrase": "MILANO",
+            "hint": "CITTÀ - Nord Italia, economia"
+        },
+        {
+            "phrase": "VENEZIA",
+            "hint": "CITTÀ - Sull'acqua"
+        },
+        {
+            "phrase": "FIRENZE",
+            "hint": "CITTÀ - Toscana, arte"
+        },
+        {
+            "phrase": "NAPOLI",
+            "hint": "CITTÀ - Sud Italia, golfo"
+        },
+        {
+            "phrase": "TORINO",
+            "hint": "CITTÀ - Piemonte, industria"
+        },
+        {
+            "phrase": "PALERMO",
+            "hint": "CITTÀ - Sicilia"
+        },
+        {
+            "phrase": "BOLOGNA",
+            "hint": "CITTÀ - Emilia, università"
+        },
+        {
+            "phrase": "GENOVA",
+            "hint": "CITTÀ - Liguria, porto"
+        },
+        {
+            "phrase": "BARI",
+            "hint": "CITTÀ - Puglia"
+        },
+        {
+            "phrase": "VERONA",
+            "hint": "CITTÀ - Veneto, arena"
+        },
+        {
+            "phrase": "PISA",
+            "hint": "CITTÀ - Toscana, monumentale"
+        },
+        {
+            "phrase": "SIENA",
+            "hint": "CITTÀ - Toscana, medievale"
+        },
+        {
+            "phrase": "AMALFI",
+            "hint": "CITTÀ - Costiera campana"
+        },
+        {
+            "phrase": "MATERA",
+            "hint": "CITTÀ - Basilicata, rupestre"
+        },
+        {
+            "phrase": "ASSISI",
+            "hint": "CITTÀ - Umbria, religiosa"
+        },
+        {
+            "phrase": "CAPRI",
+            "hint": "CITTÀ - Isola campana"
+        },
+        {
+            "phrase": "TAORMINA",
+            "hint": "CITTÀ - Sicilia, turistica"
+        },
+        {
+            "phrase": "PORTOFINO",
+            "hint": "CITTÀ - Liguria, esclusiva"
+        },
+        {
+            "phrase": "RAVENNA",
+            "hint": "CITTÀ - Emilia, mosaici"
+        }
     ],
     "COSA": [
-        "TELEFONO CELLULARE",
-        "MACCHINA DA SCRIVERE",
-        "OCCHIALI DA SOLE",
-        "PIANOFORTE A CODA",
-        "SPAZZOLINO ELETTRICO",
-        "TELECOMANDO",
-        "OROLOGIO DA POLSO",
-        "BICICLETTA",
-        "FRIGORIFERO",
-        "LAVATRICE"
+        {
+            "phrase": "TELEFONO CELLULARE",
+            "hint": "OGGETTO - Comunicazione portatile"
+        },
+        {
+            "phrase": "MACCHINA DA SCRIVERE",
+            "hint": "OGGETTO - Tasti, vintage"
+        },
+        {
+            "phrase": "OCCHIALI DA SOLE",
+            "hint": "OGGETTO - Accessorio estivo"
+        },
+        {
+            "phrase": "PIANOFORTE A CODA",
+            "hint": "OGGETTO - Strumento classico"
+        },
+        {
+            "phrase": "TELECOMANDO",
+            "hint": "OGGETTO - Controllo a distanza"
+        },
+        {
+            "phrase": "OROLOGIO DA POLSO",
+            "hint": "OGGETTO - Accessorio, tempo"
+        },
+        {
+            "phrase": "BICICLETTA",
+            "hint": "OGGETTO - Trasporto a pedali"
+        },
+        {
+            "phrase": "FRIGORIFERO",
+            "hint": "OGGETTO - Elettrodomestico, freddo"
+        },
+        {
+            "phrase": "LAVATRICE",
+            "hint": "OGGETTO - Elettrodomestico, bucato"
+        },
+        {
+            "phrase": "COMPUTER PORTATILE",
+            "hint": "OGGETTO - Tecnologia, lavoro"
+        },
+        {
+            "phrase": "ASPIRAPOLVERE",
+            "hint": "OGGETTO - Pulizia domestica"
+        },
+        {
+            "phrase": "FORNO A MICROONDE",
+            "hint": "OGGETTO - Cucina, rapido"
+        },
+        {
+            "phrase": "MACCHINA FOTOGRAFICA",
+            "hint": "OGGETTO - Cattura immagini"
+        },
+        {
+            "phrase": "CHITARRA ELETTRICA",
+            "hint": "OGGETTO - Strumento rock"
+        },
+        {
+            "phrase": "CUFFIE WIRELESS",
+            "hint": "OGGETTO - Audio, senza fili"
+        },
+        {
+            "phrase": "OMBRELLO",
+            "hint": "OGGETTO - Protezione meteo"
+        },
+        {
+            "phrase": "VALIGIA",
+            "hint": "OGGETTO - Viaggi"
+        },
+        {
+            "phrase": "ZAINO",
+            "hint": "OGGETTO - Trasporto sulle spalle"
+        },
+        {
+            "phrase": "PORTAFOGLIO",
+            "hint": "OGGETTO - Contenitore personale"
+        },
+        {
+            "phrase": "CHIAVI DI CASA",
+            "hint": "OGGETTO - Accesso abitazione"
+        },
+        {
+            "phrase": "MACCHINA DEL CAFFE",
+            "hint": "OGGETTO - Bevanda mattutina"
+        },
+        {
+            "phrase": "ASCIUGACAPELLI",
+            "hint": "OGGETTO - Cura personale"
+        },
+        {
+            "phrase": "SVEGLIA DIGITALE",
+            "hint": "OGGETTO - Mattina, suono"
+        },
+        {
+            "phrase": "PENNA A SFERA",
+            "hint": "OGGETTO - Scrittura"
+        },
+        {
+            "phrase": "LAMPADA DA TAVOLO",
+            "hint": "OGGETTO - Illuminazione"
+        }
     ],
     "PERSONAGGI": [
-        "DANTE ALIGHIERI",
-        "LEONARDO DA VINCI",
-        "MICHELANGELO BUONARROTI",
-        "GALILEO GALILEI",
-        "GIULIO CESARE",
-        "CRISTOFORO COLOMBO",
-        "NAPOLEONE BONAPARTE",
-        "ALBERT EINSTEIN",
-        "WALT DISNEY",
-        "STEVE JOBS"
+        {
+            "phrase": "DANTE ALIGHIERI",
+            "hint": "PERSONAGGIO - Poeta medievale italiano"
+        },
+        {
+            "phrase": "LEONARDO DA VINCI",
+            "hint": "PERSONAGGIO - Genio rinascimentale"
+        },
+        {
+            "phrase": "MICHELANGELO BUONARROTI",
+            "hint": "PERSONAGGIO - Artista rinascimentale"
+        },
+        {
+            "phrase": "GALILEO GALILEI",
+            "hint": "PERSONAGGIO - Scienziato pisano"
+        },
+        {
+            "phrase": "GIULIO CESARE",
+            "hint": "PERSONAGGIO - Condottiero romano"
+        },
+        {
+            "phrase": "CRISTOFORO COLOMBO",
+            "hint": "PERSONAGGIO - Navigatore genovese"
+        },
+        {
+            "phrase": "NAPOLEONE BONAPARTE",
+            "hint": "PERSONAGGIO - Imperatore francese"
+        },
+        {
+            "phrase": "ALBERT EINSTEIN",
+            "hint": "PERSONAGGIO - Fisico teorico"
+        },
+        {
+            "phrase": "WALT DISNEY",
+            "hint": "PERSONAGGIO - Animazione americana"
+        },
+        {
+            "phrase": "STEVE JOBS",
+            "hint": "PERSONAGGIO - Tecnologia, innovazione"
+        },
+        {
+            "phrase": "GIUSEPPE GARIBALDI",
+            "hint": "PERSONAGGIO - Risorgimento"
+        },
+        {
+            "phrase": "MARCO POLO",
+            "hint": "PERSONAGGIO - Esploratore veneziano"
+        },
+        {
+            "phrase": "GIUSEPPE VERDI",
+            "hint": "PERSONAGGIO - Compositore italiano"
+        },
+        {
+            "phrase": "GIACOMO PUCCINI",
+            "hint": "PERSONAGGIO - Opera lirica"
+        },
+        {
+            "phrase": "ALESSANDRO MANZONI",
+            "hint": "PERSONAGGIO - Scrittore lombardo"
+        },
+        {
+            "phrase": "RAFFAELLO SANZIO",
+            "hint": "PERSONAGGIO - Pittore rinascimentale"
+        },
+        {
+            "phrase": "CARAVAGGIO",
+            "hint": "PERSONAGGIO - Pittore barocco"
+        },
+        {
+            "phrase": "AMADEUS MOZART",
+            "hint": "PERSONAGGIO - Compositore austriaco"
+        },
+        {
+            "phrase": "LUDWIG VAN BEETHOVEN",
+            "hint": "PERSONAGGIO - Compositore tedesco"
+        },
+        {
+            "phrase": "WILLIAM SHAKESPEARE",
+            "hint": "PERSONAGGIO - Drammaturgo inglese"
+        },
+        {
+            "phrase": "PABLO PICASSO",
+            "hint": "PERSONAGGIO - Pittore spagnolo"
+        },
+        {
+            "phrase": "VINCENT VAN GOGH",
+            "hint": "PERSONAGGIO - Pittore olandese"
+        },
+        {
+            "phrase": "MARIE CURIE",
+            "hint": "PERSONAGGIO - Scienziata polacca"
+        },
+        {
+            "phrase": "NIKOLA TESLA",
+            "hint": "PERSONAGGIO - Inventore serbo"
+        },
+        {
+            "phrase": "MAHATMA GANDHI",
+            "hint": "PERSONAGGIO - Leader indiano"
+        },
+        {
+            "phrase": "NELSON MANDELA",
+            "hint": "PERSONAGGIO - Leader sudafricano"
+        },
+        {
+            "phrase": "MARTIN LUTHER KING",
+            "hint": "PERSONAGGIO - Attivista americano"
+        }
+    ],
+    "CANZONI": [
+        {
+            "phrase": "NEL BLU DIPINTO DI BLU",
+            "hint": "CANZONE - Sanremo 1958"
+        },
+        {
+            "phrase": "AZZURRO",
+            "hint": "CANZONE - Classico italiano anni '60"
+        },
+        {
+            "phrase": "FELICITA",
+            "hint": "CANZONE - Duo famoso anni '80"
+        },
+        {
+            "phrase": "BOCCA DI ROSA",
+            "hint": "CANZONE - Cantautore genovese"
+        },
+        {
+            "phrase": "LA CANZONE DEL SOLE",
+            "hint": "CANZONE - Classico estivo"
+        },
+        {
+            "phrase": "CARUSO",
+            "hint": "CANZONE - Omaggio a un tenore"
+        },
+        {
+            "phrase": "CON TE PARTIRO",
+            "hint": "CANZONE - Tenore pop italiano"
+        },
+        {
+            "phrase": "NESSUN DORMA",
+            "hint": "CANZONE - Aria operistica"
+        },
+        {
+            "phrase": "IL CIELO IN UNA STANZA",
+            "hint": "CANZONE - Classico romantico"
+        },
+        {
+            "phrase": "SAPORE DI SALE",
+            "hint": "CANZONE - Cantautore genovese, estate"
+        },
+        {
+            "phrase": "LA SOLITUDINE",
+            "hint": "CANZONE - Esordio italiano anni '90"
+        },
+        {
+            "phrase": "E PENSO A TE",
+            "hint": "CANZONE - Battisti"
+        },
+        {
+            "phrase": "GLORIA",
+            "hint": "CANZONE - Hit internazionale italiano"
+        },
+        {
+            "phrase": "O SOLE MIO",
+            "hint": "CANZONE - Classico napoletano"
+        },
+        {
+            "phrase": "VOLARE",
+            "hint": "CANZONE - Titolo alternativo famoso"
+        }
+    ],
+    "SPORT": [
+        {
+            "phrase": "CALCIO",
+            "hint": "SPORT - Pallone, 11 giocatori"
+        },
+        {
+            "phrase": "PALLAVOLO",
+            "hint": "SPORT - Rete, 6 giocatori"
+        },
+        {
+            "phrase": "PALLACANESTRO",
+            "hint": "SPORT - Canestro, NBA"
+        },
+        {
+            "phrase": "TENNIS",
+            "hint": "SPORT - Racchetta, singolo o doppio"
+        },
+        {
+            "phrase": "NUOTO",
+            "hint": "SPORT - Acqua, corsie"
+        },
+        {
+            "phrase": "CICLISMO",
+            "hint": "SPORT - Bicicletta, corse"
+        },
+        {
+            "phrase": "FORMULA UNO",
+            "hint": "SPORT - Motori, velocità"
+        },
+        {
+            "phrase": "SCI ALPINO",
+            "hint": "SPORT - Montagna, inverno"
+        },
+        {
+            "phrase": "PATTINAGGIO ARTISTICO",
+            "hint": "SPORT - Ghiaccio, eleganza"
+        },
+        {
+            "phrase": "RUGBY",
+            "hint": "SPORT - Palla ovale"
+        },
+        {
+            "phrase": "GOLF",
+            "hint": "SPORT - Buche, green"
+        },
+        {
+            "phrase": "BOXE",
+            "hint": "SPORT - Ring, guantoni"
+        },
+        {
+            "phrase": "SCHERMA",
+            "hint": "SPORT - Spade, tocco"
+        },
+        {
+            "phrase": "GINNASTICA ARTISTICA",
+            "hint": "SPORT - Attrezzi, acrobazie"
+        },
+        {
+            "phrase": "MARATONA",
+            "hint": "SPORT - Corsa, resistenza"
+        }
+    ],
+    "CIBO": [
+        {
+            "phrase": "PIZZA MARGHERITA",
+            "hint": "CIBO - Piatto napoletano"
+        },
+        {
+            "phrase": "SPAGHETTI ALLA CARBONARA",
+            "hint": "CIBO - Primo romano"
+        },
+        {
+            "phrase": "LASAGNE ALLA BOLOGNESE",
+            "hint": "CIBO - Primo emiliano"
+        },
+        {
+            "phrase": "RISOTTO ALLO ZAFFERANO",
+            "hint": "CIBO - Primo milanese"
+        },
+        {
+            "phrase": "PARMIGIANA DI MELANZANE",
+            "hint": "CIBO - Piatto al forno"
+        },
+        {
+            "phrase": "TIRAMISU",
+            "hint": "CIBO - Dolce al caffè"
+        },
+        {
+            "phrase": "GELATO ALLA FRAGOLA",
+            "hint": "CIBO - Dolce freddo"
+        },
+        {
+            "phrase": "PANNA COTTA",
+            "hint": "CIBO - Dolce piemontese"
+        },
+        {
+            "phrase": "CANNOLI SICILIANI",
+            "hint": "CIBO - Dolce siciliano"
+        },
+        {
+            "phrase": "PANETTONE",
+            "hint": "CIBO - Dolce natalizio"
+        },
+        {
+            "phrase": "MOZZARELLA DI BUFALA",
+            "hint": "CIBO - Formaggio campano"
+        },
+        {
+            "phrase": "PROSCIUTTO DI PARMA",
+            "hint": "CIBO - Affettato emiliano"
+        },
+        {
+            "phrase": "PARMIGIANO REGGIANO",
+            "hint": "CIBO - Formaggio stagionato"
+        },
+        {
+            "phrase": "PASTA AL PESTO",
+            "hint": "CIBO - Primo ligure"
+        },
+        {
+            "phrase": "TORTELLINI IN BRODO",
+            "hint": "CIBO - Pasta ripiena"
+        }
+    ],
+    "ANIMALI": [
+        {
+            "phrase": "LEONE",
+            "hint": "ANIMALE - Felino africano"
+        },
+        {
+            "phrase": "ELEFANTE",
+            "hint": "ANIMALE - Grande mammifero"
+        },
+        {
+            "phrase": "GIRAFFA",
+            "hint": "ANIMALE - Collo lungo"
+        },
+        {
+            "phrase": "DELFINO",
+            "hint": "ANIMALE - Mammifero marino"
+        },
+        {
+            "phrase": "PINGUINO",
+            "hint": "ANIMALE - Uccello antartico"
+        },
+        {
+            "phrase": "AQUILA",
+            "hint": "ANIMALE - Rapace"
+        },
+        {
+            "phrase": "PANDA",
+            "hint": "ANIMALE - Orso asiatico"
+        },
+        {
+            "phrase": "TIGRE",
+            "hint": "ANIMALE - Felino striato"
+        },
+        {
+            "phrase": "BALENA",
+            "hint": "ANIMALE - Cetaceo gigante"
+        },
+        {
+            "phrase": "COCCODRILLO",
+            "hint": "ANIMALE - Rettile acquatico"
+        },
+        {
+            "phrase": "CAVALLO",
+            "hint": "ANIMALE - Equide domestico"
+        },
+        {
+            "phrase": "GUFO",
+            "hint": "ANIMALE - Rapace notturno"
+        },
+        {
+            "phrase": "FARFALLA",
+            "hint": "ANIMALE - Insetto colorato"
+        },
+        {
+            "phrase": "SQUALO",
+            "hint": "ANIMALE - Pesce predatore"
+        },
+        {
+            "phrase": "TARTARUGA",
+            "hint": "ANIMALE - Rettile con corazza"
+        }
+    ],
+    "MESTIERI": [
+        {
+            "phrase": "MEDICO CHIRURGO",
+            "hint": "MESTIERE - Sanità, operazioni"
+        },
+        {
+            "phrase": "AVVOCATO PENALISTA",
+            "hint": "MESTIERE - Legge, tribunale"
+        },
+        {
+            "phrase": "INGEGNERE INFORMATICO",
+            "hint": "MESTIERE - Tecnologia, codice"
+        },
+        {
+            "phrase": "ARCHITETTO",
+            "hint": "MESTIERE - Progettazione edifici"
+        },
+        {
+            "phrase": "INSEGNANTE",
+            "hint": "MESTIERE - Istruzione"
+        },
+        {
+            "phrase": "INFERMIERE",
+            "hint": "MESTIERE - Sanità, assistenza"
+        },
+        {
+            "phrase": "VIGILE DEL FUOCO",
+            "hint": "MESTIERE - Emergenze, incendi"
+        },
+        {
+            "phrase": "PILOTA DI AEREI",
+            "hint": "MESTIERE - Aviazione"
+        },
+        {
+            "phrase": "CUOCO",
+            "hint": "MESTIERE - Cucina professionale"
+        },
+        {
+            "phrase": "GIORNALISTA",
+            "hint": "MESTIERE - Informazione"
+        },
+        {
+            "phrase": "FOTOGRAFO",
+            "hint": "MESTIERE - Immagini"
+        },
+        {
+            "phrase": "VETERINARIO",
+            "hint": "MESTIERE - Cura animali"
+        },
+        {
+            "phrase": "POLIZIOTTO",
+            "hint": "MESTIERE - Ordine pubblico"
+        },
+        {
+            "phrase": "MUSICISTA",
+            "hint": "MESTIERE - Arte sonora"
+        },
+        {
+            "phrase": "PARRUCCHIERE",
+            "hint": "MESTIERE - Cura capelli"
+        }
     ]
 }

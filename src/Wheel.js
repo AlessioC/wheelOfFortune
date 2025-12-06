@@ -110,11 +110,12 @@ export class Wheel {
             this.ctx.translate(0, 0);
             this.ctx.rotate(startAngle + this.arc / 2); // Rotate to center of segment
             this.ctx.textAlign = "right";
+            this.ctx.textBaseline = "middle"; // Vertically center the text
             this.ctx.fillStyle = segment.textColor;
             // Adjust font size based on radius
-            const fontSize = Math.max(14, this.radius / 10);
+            const fontSize = Math.max(12, this.radius / 12);
             this.ctx.font = `bold ${fontSize}px Outfit, sans-serif`;
-            this.ctx.fillText(segment.text, this.radius - 20, 10);
+            this.ctx.fillText(segment.text, this.radius - 15, 0); // y=0 for proper centering
             this.ctx.restore();
         });
 

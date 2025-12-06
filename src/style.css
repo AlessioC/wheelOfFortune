@@ -289,11 +289,13 @@ button:disabled {
   flex-direction: column;
   align-items: center;
   position: relative;
+  padding-top: 25px;
+  /* Space for marker */
 }
 
 #wheel-marker {
   position: absolute;
-  top: -15px;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   font-size: 40px;
@@ -301,16 +303,18 @@ button:disabled {
   z-index: 10;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   pointer-events: none;
+  line-height: 1;
 }
 
-canvas {
+#wheel-canvas {
   cursor: grab;
   border-radius: 50%;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
   background: radial-gradient(circle, #222, #000);
+  display: block;
 }
 
-canvas:active {
+#wheel-canvas:active {
   cursor: grabbing;
 }
 
@@ -318,10 +322,10 @@ canvas:active {
    MOBILE RESPONSIVE STYLES
    ======================================== */
 
-/* Canvas responsive sizing */
+/* Canvas sizing - desktop */
 #wheel-canvas {
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
 }
 
 /* Small screens */
@@ -409,16 +413,20 @@ canvas:active {
   /* Smaller wheel container */
   #wheel-container {
     width: 100%;
-    max-width: 280px;
+    max-width: 300px;
+    padding-top: 20px;
   }
 
   #wheel-canvas {
-    max-width: 280px;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    aspect-ratio: 1 / 1;
   }
 
   #wheel-marker {
-    font-size: 30px;
-    top: -10px;
+    font-size: 28px;
+    top: -5px;
   }
 }
 

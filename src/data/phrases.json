@@ -1,0 +1,61 @@
+{
+    "FILM": [
+        "LA VITA E BELLA",
+        "IL GLADIATORE",
+        "NUOVO CINEMA PARADISO",
+        "LA DOLCE VITA",
+        "IL PADRINO",
+        "TITANIC",
+        "FORREST GUMP",
+        "RITORNO AL FUTURO",
+        "GUERRE STELLARI",
+        "MATRIX"
+    ],
+    "PROVERBI": [
+        "CHI DORME NON PIGLIA PESCI",
+        "ROSSO DI SERA BEL TEMPO SI SPERA",
+        "A CAVAL DONATO NON SI GUARDA IN BOCCA",
+        "CHI FA DA SE FA PER TRE",
+        "TENTAR NON NUOCE",
+        "RIDE BENE CHI RIDE ULTIMO",
+        "L ABITO NON FA IL MONACO",
+        "TRA IL DIRE E IL FARE C E DI MEZZO IL MARE",
+        "MEGLIO TARDI CHE MAI"
+    ],
+    "CITTÀ": [
+        "ROMA",
+        "MILANO",
+        "VENEZIA",
+        "FIRENZE",
+        "NAPOLI",
+        "TORINO",
+        "PALERMO",
+        "BOLOGNA",
+        "GENOVA",
+        "BARI"
+    ],
+    "COSA": [
+        "TELEFONO CELLULARE",
+        "MACCHINA DA SCRIVERE",
+        "OCCHIALI DA SOLE",
+        "PIANOFORTE A CODA",
+        "SPAZZOLINO ELETTRICO",
+        "TELECOMANDO",
+        "OROLOGIO DA POLSO",
+        "BICICLETTA",
+        "FRIGORIFERO",
+        "LAVATRICE"
+    ],
+    "PERSONAGGI": [
+        "DANTE ALIGHIERI",
+        "LEONARDO DA VINCI",
+        "MICHELANGELO BUONARROTI",
+        "GALILEO GALILEI",
+        "GIULIO CESARE",
+        "CRISTOFORO COLOMBO",
+        "NAPOLEONE BONAPARTE",
+        "ALBERT EINSTEIN",
+        "WALT DISNEY",
+        "STEVE JOBS"
+    ]
+}

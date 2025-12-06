@@ -3,37 +3,55 @@ export class Wheel {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
 
-        // Configuration
-        this.segments = [
-            { text: '500', value: 500, color: '#3498db', textColor: '#fff' },
-            { text: 'PERDE', value: 0, color: '#e74c3c', textColor: '#fff' }, // Bankrupt
-            { text: '1000', value: 1000, color: '#f1c40f', textColor: '#000' },
-            { text: '200', value: 200, color: '#9b59b6', textColor: '#fff' },
-            { text: 'PASSA', value: -1, color: '#95a5a6', textColor: '#000' }, // Skip Turn
-            { text: '500', value: 500, color: '#3498db', textColor: '#fff' },
-            { text: '100', value: 100, color: '#e67e22', textColor: '#fff' },
-            { text: '2000', value: 2000, color: '#2ecc71', textColor: '#000' },
-            { text: '300', value: 300, color: '#1abc9c', textColor: '#fff' },
-            { text: 'PERDE', value: 0, color: '#e74c3c', textColor: '#fff' },
-            { text: '400', value: 400, color: '#34495e', textColor: '#fff' },
-            { text: '500', value: 500, color: '#3498db', textColor: '#fff' }
-        ];
+        // Segment configurations for different modes
+        this.segmentConfigs = {
+            single: [
+                { text: '500', value: 500, color: '#3498db', textColor: '#fff' },
+                { text: 'PERDE', value: 0, color: '#e74c3c', textColor: '#fff' },
+                { text: '1000', value: 1000, color: '#f1c40f', textColor: '#000' },
+                { text: '200', value: 200, color: '#9b59b6', textColor: '#fff' },
+                { text: '1500', value: 1500, color: '#27ae60', textColor: '#fff' }, // Bonus instead of PASSA
+                { text: '500', value: 500, color: '#3498db', textColor: '#fff' },
+                { text: '100', value: 100, color: '#e67e22', textColor: '#fff' },
+                { text: '2000', value: 2000, color: '#2ecc71', textColor: '#000' },
+                { text: '300', value: 300, color: '#1abc9c', textColor: '#fff' },
+                { text: 'PERDE', value: 0, color: '#e74c3c', textColor: '#fff' },
+                { text: '400', value: 400, color: '#34495e', textColor: '#fff' },
+                { text: '3000', value: 3000, color: '#f39c12', textColor: '#000' } // Jackpot instead of 500
+            ],
+            multi: [
+                { text: '500', value: 500, color: '#3498db', textColor: '#fff' },
+                { text: 'PERDE', value: 0, color: '#e74c3c', textColor: '#fff' },
+                { text: '1000', value: 1000, color: '#f1c40f', textColor: '#000' },
+                { text: '200', value: 200, color: '#9b59b6', textColor: '#fff' },
+                { text: 'PASSA', value: -1, color: '#95a5a6', textColor: '#000' },
+                { text: '500', value: 500, color: '#3498db', textColor: '#fff' },
+                { text: '100', value: 100, color: '#e67e22', textColor: '#fff' },
+                { text: '2000', value: 2000, color: '#2ecc71', textColor: '#000' },
+                { text: '300', value: 300, color: '#1abc9c', textColor: '#fff' },
+                { text: 'PERDE', value: 0, color: '#e74c3c', textColor: '#fff' },
+                { text: '400', value: 400, color: '#34495e', textColor: '#fff' },
+                { text: '500', value: 500, color: '#3498db', textColor: '#fff' }
+            ]
+        };
 
+        // Default to multi (will be set by Game)
+        this.segments = this.segmentConfigs.multi;
         this.totalSegments = this.segments.length;
         this.arc = Math.PI * 2 / this.totalSegments;
 
         // State
-        this.angle = 0; // Current rotation
+        this.angle = 0;
         this.angularVelocity = 0;
         this.isSpinning = false;
-        this.friction = 0.985; // Deceleration factor (0.99 = slow stop, 0.95 = fast stop)
+        this.friction = 0.985;
         this.minSpeed = 0.002;
 
         // Interaction State
         this.isDragging = false;
         this.lastMouseAngle = 0;
         this.lastMouseTime = 0;
-        this.dragVelocities = []; // Store recent velocities for smooth throws
+        this.dragVelocities = [];
 
         // Bindings
         this.resize = this.resize.bind(this);
@@ -41,6 +59,18 @@ export class Wheel {
         this.handleStart = this.handleStart.bind(this);
         this.handleMove = this.handleMove.bind(this);
         this.handleEnd = this.handleEnd.bind(this);
+    }
+
+    /**
+     * Set wheel mode - changes segment configuration
+     * @param {string} mode - 'single' or 'multi'
+     */
+    setMode(mode) {
+        this.segments = this.segmentConfigs[mode] || this.segmentConfigs.multi;
+        this.totalSegments = this.segments.length;
+        this.arc = Math.PI * 2 / this.totalSegments;
+        this.angle = 0; // Reset rotation
+        this.draw();
     }
 
     init() {

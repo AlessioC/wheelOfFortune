@@ -60,6 +60,9 @@ export class Game {
         this.players = players.map(p => ({ ...p, score: 0 }));
         this.currentPlayerIndex = 0;
 
+        // Set wheel configuration based on mode
+        this.wheel.setMode(mode);
+
         this.renderPlayersBar();
         this.startNewRound();
     }

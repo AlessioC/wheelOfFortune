@@ -25,6 +25,7 @@ export class Game {
 
         // Game State
         this.mode = 'single'; // 'single' or 'multi'
+        this.difficulty = 'easy'; // 'easy', 'medium', 'hard'
         this.players = [];
         this.currentPlayerIndex = 0;
         this.currentPhrase = "";
@@ -51,12 +52,14 @@ export class Game {
     }
 
     /**
-     * Start a new game with the given mode and players
+     * Start a new game with the given mode, players and difficulty
      * @param {string} mode - 'single' or 'multi'
      * @param {Array} players - Array of { name, score } objects
+     * @param {string} difficulty - 'easy', 'medium', or 'hard'
      */
-    startGame(mode, players) {
+    startGame(mode, players, difficulty = 'easy') {
         this.mode = mode;
+        this.difficulty = difficulty;
         this.players = players.map(p => ({ ...p, score: 0 }));
         this.currentPlayerIndex = 0;
 
@@ -94,13 +97,20 @@ export class Game {
     }
 
     startNewRound() {
-        // Pick random category
-        const categories = Object.keys(phrasesData);
+        // Get phrases for current difficulty
+        const difficultyPhrases = phrasesData[this.difficulty];
+        if (!difficultyPhrases) {
+            console.error('Invalid difficulty:', this.difficulty);
+            return;
+        }
+
+        // Pick random category from the difficulty level
+        const categories = Object.keys(difficultyPhrases);
         const randomCatIndex = Math.floor(Math.random() * categories.length);
         this.currentCategory = categories[randomCatIndex];
 
         // Pick random phrase (now an object with phrase and hint)
-        const phrases = phrasesData[this.currentCategory];
+        const phrases = difficultyPhrases[this.currentCategory];
         const randomPhraseIndex = Math.floor(Math.random() * phrases.length);
         const selectedItem = phrases[randomPhraseIndex];
         this.currentPhrase = selectedItem.phrase.toUpperCase();

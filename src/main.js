@@ -19,8 +19,8 @@ const game = new Game(wheel, board, menu);
 game.init();
 
 // Connect menu to game start
-menu.onStartGame = (mode, players) => {
+menu.onStartGame = (mode, players, difficulty) => {
     wheel.init(); // Re-init wheel when game starts (for proper sizing)
     board.init();
-    game.startGame(mode, players);
+    game.startGame(mode, players, difficulty);
 };

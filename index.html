@@ -13,19 +13,19 @@
 
 <body>
   <div id="app">
-    
+
     <!-- ========== MENU SCREEN ========== -->
     <div id="menu-screen" class="screen">
       <header>
         <h1>LA RUOTA DELLA FORTUNA</h1>
       </header>
-      
+
       <div class="menu-container">
         <button id="btn-single" class="menu-btn">🎮 GIOCATORE SINGOLO</button>
         <button id="btn-multi" class="menu-btn">👥 MULTIPLAYER LOCALE</button>
         <button id="btn-leaderboard" class="menu-btn secondary">🏆 CLASSIFICA</button>
       </div>
-      
+
       <!-- Multiplayer Setup (hidden by default) -->
       <div id="multi-setup" style="display: none;">
         <h2>Quanti giocatori?</h2>
@@ -35,8 +35,31 @@
           <button class="player-count-btn" data-count="4">4</button>
         </div>
         <div id="player-names-container"></div>
-        <button id="btn-start-multi" class="menu-btn" style="display: none;">INIZIA PARTITA</button>
+        <button id="btn-start-multi" class="menu-btn" style="display: none;">CONTINUA</button>
         <button id="btn-back-menu" class="menu-btn secondary">← INDIETRO</button>
+      </div>
+
+      <!-- Difficulty Selection (hidden by default) -->
+      <div id="difficulty-setup" style="display: none;">
+        <h2>Scegli la Difficoltà</h2>
+        <div class="difficulty-buttons">
+          <button class="difficulty-btn" data-difficulty="easy">
+            <span class="diff-icon">⭐</span>
+            <span class="diff-label">FACILE</span>
+            <span class="diff-desc">Frasi brevi, hint dettagliati</span>
+          </button>
+          <button class="difficulty-btn" data-difficulty="medium">
+            <span class="diff-icon">⭐⭐</span>
+            <span class="diff-label">MEDIA</span>
+            <span class="diff-desc">Frasi medie, hint sintetici</span>
+          </button>
+          <button class="difficulty-btn" data-difficulty="hard">
+            <span class="diff-icon">⭐⭐⭐</span>
+            <span class="diff-label">DIFFICILE</span>
+            <span class="diff-desc">Frasi lunghe, hint minimi</span>
+          </button>
+        </div>
+        <button id="btn-back-difficulty" class="menu-btn secondary">← INDIETRO</button>
       </div>
     </div>
 
@@ -80,12 +103,12 @@
       <header>
         <h1>🏆 CLASSIFICA</h1>
       </header>
-      
+
       <div class="leaderboard-tabs">
         <button class="tab-btn active" data-tab="single">SINGOLO</button>
         <button class="tab-btn" data-tab="multi">MULTIPLAYER</button>
       </div>
-      
+
       <div id="leaderboard-content">
         <table id="leaderboard-table">
           <thead>
@@ -100,7 +123,7 @@
         </table>
         <p id="no-scores-msg" style="display: none;">Nessun punteggio registrato.</p>
       </div>
-      
+
       <button id="btn-leaderboard-back" class="menu-btn secondary">← MENU</button>
     </div>
 

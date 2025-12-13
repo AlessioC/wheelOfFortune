@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/wheelOfFortune/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Ruota della Fortuna</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/wheelOfFortune/assets/index-CMP5geWu.js"></script>
+  <link rel="stylesheet" crossorigin href="/wheelOfFortune/assets/index-DiYoIsFc.css">
+</head>
+
+<body>
+  <div id="app">
+
+    <!-- ========== MENU SCREEN ========== -->
+    <div id="menu-screen" class="screen">
+      <header>
+        <h1>LA RUOTA DELLA FORTUNA</h1>
+      </header>
+
+      <div class="menu-container">
+        <button id="btn-single" class="menu-btn">🎮 GIOCATORE SINGOLO</button>
+        <button id="btn-multi" class="menu-btn">👥 MULTIPLAYER LOCALE</button>
+        <button id="btn-leaderboard" class="menu-btn secondary">🏆 CLASSIFICA</button>
+      </div>
+
+      <!-- Multiplayer Setup (hidden by default) -->
+      <div id="multi-setup" style="display: none;">
+        <h2>Quanti giocatori?</h2>
+        <div class="player-count-btns">
+          <button class="player-count-btn" data-count="2">2</button>
+          <button class="player-count-btn" data-count="3">3</button>
+          <button class="player-count-btn" data-count="4">4</button>
+        </div>
+        <div id="player-names-container"></div>
+        <button id="btn-start-multi" class="menu-btn" style="display: none;">CONTINUA</button>
+        <button id="btn-back-menu" class="menu-btn secondary">← INDIETRO</button>
+      </div>
+
+      <!-- Difficulty Selection (hidden by default) -->
+      <div id="difficulty-setup" style="display: none;">
+        <h2>Scegli la Difficoltà</h2>
+        <div class="difficulty-buttons">
+          <button class="difficulty-btn" data-difficulty="easy">
+            <span class="diff-icon">⭐</span>
+            <span class="diff-label">FACILE</span>
+            <span class="diff-desc">Frasi brevi, hint dettagliati</span>
+          </button>
+          <button class="difficulty-btn" data-difficulty="medium">
+            <span class="diff-icon">⭐⭐</span>
+            <span class="diff-label">MEDIA</span>
+            <span class="diff-desc">Frasi medie, hint sintetici</span>
+          </button>
+          <button class="difficulty-btn" data-difficulty="hard">
+            <span class="diff-icon">⭐⭐⭐</span>
+            <span class="diff-label">DIFFICILE</span>
+            <span class="diff-desc">Frasi lunghe, hint minimi</span>
+          </button>
+        </div>
+        <button id="btn-back-difficulty" class="menu-btn secondary">← INDIETRO</button>
+      </div>
+    </div>
+
+    <!-- ========== GAME SCREEN ========== -->
+    <div id="game-screen" class="screen" style="display: none;">
+      <header>
+        <h1>LA RUOTA DELLA FORTUNA</h1>
+        <div id="players-bar"></div>
+        <div id="score-container">
+          <span id="current-player-name"></span>
+          <span>Punteggio: </span>
+          <span id="score">0</span>
+        </div>
+      </header>
+
+      <main>
+        <div id="board-container">
+          <div id="category-display">CATEGORIA</div>
+          <div id="puzzle-board"></div>
+          <div id="controls">
+            <div id="keyboard">
+              <div id="consonants" class="letter-row"></div>
+              <div id="vowels" class="letter-row"></div>
+            </div>
+            <button id="solve-btn">SOLUZIONE</button>
+            <button id="new-game-btn" style="display: none;">NUOVA PARTITA</button>
+            <button id="btn-back-to-menu" style="display: none;">🏠 MENU</button>
+          </div>
+          <div id="message-area">Gira la ruota!</div>
+        </div>
+
+        <div id="wheel-container">
+          <div id="wheel-marker">▼</div>
+          <canvas id="wheel-canvas"></canvas>
+        </div>
+      </main>
+    </div>
+
+    <!-- ========== LEADERBOARD SCREEN ========== -->
+    <div id="leaderboard-screen" class="screen" style="display: none;">
+      <header>
+        <h1>🏆 CLASSIFICA</h1>
+      </header>
+
+      <div class="leaderboard-tabs">
+        <button class="tab-btn active" data-tab="single">SINGOLO</button>
+        <button class="tab-btn" data-tab="multi">MULTIPLAYER</button>
+      </div>
+
+      <div id="leaderboard-content">
+        <table id="leaderboard-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nome</th>
+              <th>Punteggio</th>
+              <th>Difficoltà</th>
+              <th>Data</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body"></tbody>
+        </table>
+        <p id="no-scores-msg" style="display: none;">Nessun punteggio registrato.</p>
+      </div>
+
+      <button id="btn-leaderboard-back" class="menu-btn secondary">← MENU</button>
+    </div>
+
+    <!-- ========== GAME OVER MODAL ========== -->
+    <div id="game-over-modal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <h2 id="game-over-title">🎉 COMPLIMENTI!</h2>
+        <p id="game-over-message"></p>
+        <div id="save-score-form">
+          <input type="text" id="winner-name" placeholder="Il tuo nome" maxlength="15">
+          <button id="btn-save-score">SALVA PUNTEGGIO</button>
+        </div>
+        <div class="modal-buttons">
+          <button id="btn-play-again" class="menu-btn">🔄 GIOCA ANCORA</button>
+          <button id="btn-modal-menu" class="menu-btn secondary">🏠 MENU</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>

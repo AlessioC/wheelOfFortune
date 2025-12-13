@@ -4,34 +4,59 @@ export class Wheel {
         this.ctx = canvas.getContext('2d');
 
         // Segment configurations for different modes
+        // Segment configurations for different modes
         this.segmentConfigs = {
             single: [
-                { text: '500', value: 500, color: '#3498db', textColor: '#fff' },
-                { text: 'PERDE', value: 0, color: '#e74c3c', textColor: '#fff' },
-                { text: '1000', value: 1000, color: '#f1c40f', textColor: '#000' },
-                { text: '200', value: 200, color: '#9b59b6', textColor: '#fff' },
-                { text: '1500', value: 1500, color: '#27ae60', textColor: '#fff' }, // Bonus instead of PASSA
-                { text: '500', value: 500, color: '#3498db', textColor: '#fff' },
-                { text: 'PERDE', value: 0, color: '#e74c3c', textColor: '#fff' },
-                { text: '2000', value: 2000, color: '#2ecc71', textColor: '#000' },
-                { text: '300', value: 300, color: '#1abc9c', textColor: '#fff' },
-                { text: 'PERDE', value: 0, color: '#e74c3c', textColor: '#fff' },
-                { text: '400', value: 400, color: '#34495e', textColor: '#fff' },
-                { text: '3000', value: 3000, color: '#f39c12', textColor: '#000' } // Jackpot instead of 500
+                { text: 'BANCAROTTA', value: 0, color: '#1a1a1a', textColor: '#fff' }, // Nero
+                { text: '2000', value: 2000, color: '#D4AF37', textColor: '#000' },   // Oro
+                { text: '200', value: 200, color: '#FFFF00', textColor: '#000' },     // Giallo
+                { text: '350', value: 350, color: '#FF69B4', textColor: '#000' },     // Rosa
+                { text: '100', value: 100, color: '#FF0000', textColor: '#fff' },     // Rosso
+                { text: '?', value: -2, color: '#1E90FF', textColor: '#fff' },        // Blu (Mystery)
+                { text: 'BANCAROTTA', value: 0, color: '#f0f0f0', textColor: '#000' }, // Bianco (ex Passa)
+                { text: '300', value: 300, color: '#FF00FF', textColor: '#fff' },     // Fucsia
+                { text: '150', value: 150, color: '#8B4513', textColor: '#fff' },     // Marrone
+                { text: '400', value: 400, color: '#32CD32', textColor: '#000' },     // Verde Chiaro
+                { text: '250', value: 250, color: '#FAFAD2', textColor: '#000' },     // Giallino
+                { text: '1000', value: 1000, color: '#87CEFA', textColor: '#000' },   // Celeste
+                { text: 'BANCAROTTA', value: 0, color: '#1a1a1a', textColor: '#fff' }, // Nero
+                { text: '200', value: 200, color: '#CD5C5C', textColor: '#fff' },     // Rosso scuro
+                { text: '?', value: -2, color: '#FFD700', textColor: '#000' },        // Oro (Mystery)
+                { text: '300', value: 300, color: '#FFC0CB', textColor: '#000' },     // Rosa
+                { text: '150', value: 150, color: '#FFA500', textColor: '#000' },     // Arancione
+                { text: '400', value: 400, color: '#90EE90', textColor: '#000' },     // Verde pallido
+                { text: 'BANCAROTTA', value: 0, color: '#f0f0f0', textColor: '#000' }, // Bianco (ex Passa)
+                { text: '350', value: 350, color: '#ADD8E6', textColor: '#000' },     // Celeste
+                { text: '700', value: 700, color: '#228B22', textColor: '#fff' },     // Verde scuro
+                { text: '500', value: 500, color: '#F0E68C', textColor: '#000' },     // Kaki
+                { text: '250', value: 250, color: '#FFB6C1', textColor: '#000' },     // Rosa chiaro
+                { text: '400', value: 400, color: '#00CED1', textColor: '#000' }      // Turchese
             ],
             multi: [
-                { text: '500', value: 500, color: '#3498db', textColor: '#fff' },
-                { text: 'PERDE', value: 0, color: '#e74c3c', textColor: '#fff' },
-                { text: '1000', value: 1000, color: '#f1c40f', textColor: '#000' },
-                { text: '200', value: 200, color: '#9b59b6', textColor: '#fff' },
-                { text: 'PASSA', value: -1, color: '#95a5a6', textColor: '#000' },
-                { text: '500', value: 500, color: '#3498db', textColor: '#fff' },
-                { text: '100', value: 100, color: '#e67e22', textColor: '#fff' },
-                { text: '2000', value: 2000, color: '#2ecc71', textColor: '#000' },
-                { text: '300', value: 300, color: '#1abc9c', textColor: '#fff' },
-                { text: 'PERDE', value: 0, color: '#e74c3c', textColor: '#fff' },
-                { text: '400', value: 400, color: '#34495e', textColor: '#fff' },
-                { text: '500', value: 500, color: '#3498db', textColor: '#fff' }
+                { text: 'BANCAROTTA', value: 0, color: '#1a1a1a', textColor: '#fff' }, // Nero
+                { text: '2000', value: 2000, color: '#D4AF37', textColor: '#000' },   // Oro
+                { text: '200', value: 200, color: '#FFFF00', textColor: '#000' },     // Giallo
+                { text: '350', value: 350, color: '#FF69B4', textColor: '#000' },     // Rosa
+                { text: '100', value: 100, color: '#FF0000', textColor: '#fff' },     // Rosso
+                { text: '?', value: -2, color: '#1E90FF', textColor: '#fff' },        // Blu (Mystery)
+                { text: 'PASSA', value: -1, color: '#f0f0f0', textColor: '#000' },    // Bianco
+                { text: '300', value: 300, color: '#FF00FF', textColor: '#fff' },     // Fucsia
+                { text: '150', value: 150, color: '#8B4513', textColor: '#fff' },     // Marrone
+                { text: '400', value: 400, color: '#32CD32', textColor: '#000' },     // Verde Chiaro
+                { text: '250', value: 250, color: '#FAFAD2', textColor: '#000' },     // Giallino
+                { text: '1000', value: 1000, color: '#87CEFA', textColor: '#000' },   // Celeste
+                { text: 'BANCAROTTA', value: 0, color: '#1a1a1a', textColor: '#fff' }, // Nero
+                { text: '200', value: 200, color: '#CD5C5C', textColor: '#fff' },     // Rosso scuro
+                { text: '?', value: -2, color: '#FFD700', textColor: '#000' },        // Oro (Mystery)
+                { text: '300', value: 300, color: '#FFC0CB', textColor: '#000' },     // Rosa
+                { text: '150', value: 150, color: '#FFA500', textColor: '#000' },     // Arancione
+                { text: '400', value: 400, color: '#90EE90', textColor: '#000' },     // Verde pallido
+                { text: 'PASSA', value: -1, color: '#f0f0f0', textColor: '#000' },    // Bianco
+                { text: '350', value: 350, color: '#ADD8E6', textColor: '#000' },     // Celeste
+                { text: '700', value: 700, color: '#228B22', textColor: '#fff' },     // Verde scuro
+                { text: '500', value: 500, color: '#F0E68C', textColor: '#000' },     // Kaki
+                { text: '250', value: 250, color: '#FFB6C1', textColor: '#000' },     // Rosa chiaro
+                { text: '400', value: 400, color: '#00CED1', textColor: '#000' }      // Turchese
             ]
         };
 
@@ -158,24 +183,16 @@ export class Wheel {
             this.ctx.textAlign = "right";
             this.ctx.textBaseline = "middle"; // Vertically center the text
             this.ctx.fillStyle = segment.textColor;
-            // Adjust font size based on radius
-            const fontSize = Math.max(12, this.radius / 12);
+            // Adjust font size based on radius and text length
+            let fontSize = Math.max(12, this.radius / 13);
+            if (segment.text.length > 8) fontSize *= 0.7; // Reduce for long text like BANCAROTTA
+
             this.ctx.font = `bold ${fontSize}px Outfit, sans-serif`;
-            this.ctx.fillText(segment.text, this.radius - 15, 0); // y=0 for proper centering
+            this.ctx.fillText(segment.text, this.radius - 20, 0); // y=0 for proper centering
             this.ctx.restore();
         });
 
         this.ctx.restore();
-
-        // Center Hub (Static decoration - drawn on top of rotated context?) 
-        // Wait, I cleared context. So drawing here is fine.
-
-        // Draw outer rim
-        this.ctx.beginPath();
-        this.ctx.arc(this.centerX, this.centerY, this.radius, 0, Math.PI * 2);
-        this.ctx.lineWidth = 5;
-        this.ctx.strokeStyle = "#d4af37";
-        this.ctx.stroke();
 
         // Center Hub
         this.ctx.beginPath();

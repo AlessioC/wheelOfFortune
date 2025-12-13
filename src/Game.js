@@ -221,7 +221,8 @@ export class Game {
         const segment = e.detail;
         console.log("Segment landed:", segment);
 
-        if (segment.text === 'PERDE') {
+        // VALUE 0 = BANCAROTTA / PERDE
+        if (segment.value === 0) {
             this.setMessage(`${this.mode === 'multi' ? this.currentPlayer.name + ': ' : ''}BANCAROTTA!`);
             this.currentPlayer.score = 0;
             this.updatePlayerDisplay();
@@ -235,7 +236,10 @@ export class Game {
                 this.wheel.unlock();
             }
             return;
-        } else if (segment.text === 'PASSA') {
+        }
+
+        // VALUE -1 = PASSA
+        else if (segment.value === -1) {
             this.setMessage(`${this.mode === 'multi' ? this.currentPlayer.name + ': ' : ''}Turno perso!`);
             this.canGuessConsonant = false;
             this.updateKeyboardState();
@@ -248,11 +252,45 @@ export class Game {
             return;
         }
 
-        // It's a value
+        // VALUE -2 = MYSTERY
+        else if (segment.value === -2) {
+            // Mystery / Dice Roll
+            this.handleMysterySegment();
+            return;
+        }
+
+        // STANDARD VALUE
         this.currentSegmentValue = segment.value;
         this.canGuessConsonant = true;
         this.updateKeyboardState();
         this.setMessage(`Valore: ${segment.value}. Scegli una consonante!`);
+    }
+
+    handleMysterySegment() {
+        this.setMessage("Mistero! 🎲 Lancio del dado in corso...");
+
+        // Simple animation delay
+        let rollCount = 0;
+        const rollInterval = setInterval(() => {
+            const roll = Math.floor(Math.random() * 6) + 1;
+            this.setMessage(`Mistero! 🎲 ... ${roll}`);
+            rollCount++;
+            if (rollCount > 10) {
+                clearInterval(rollInterval);
+                this.finalizeDiceRoll();
+            }
+        }, 100);
+    }
+
+    finalizeDiceRoll() {
+        const roll = Math.floor(Math.random() * 6) + 1;
+        const value = roll * 500;
+
+        this.currentSegmentValue = value;
+        this.canGuessConsonant = true;
+        this.updateKeyboardState();
+
+        this.setMessage(`🎲 È uscito ${roll}! Valore: ${value}. Scegli una consonante!`);
     }
 
     // ========== LETTER GUESSING ==========

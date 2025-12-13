@@ -44,6 +44,7 @@ export class Wheel {
         this.angle = 0;
         this.angularVelocity = 0;
         this.isSpinning = false;
+        this.isLocked = false; // Prevents spinning when true
         this.friction = 0.985;
         this.minSpeed = 0.002;
 
@@ -59,6 +60,21 @@ export class Wheel {
         this.handleStart = this.handleStart.bind(this);
         this.handleMove = this.handleMove.bind(this);
         this.handleEnd = this.handleEnd.bind(this);
+    }
+
+    unlock() {
+        this.isLocked = false;
+    }
+
+    spinAI() {
+        if (this.isSpinning || this.isLocked) return;
+
+        // Random spin strength
+        const force = 0.5 + Math.random() * 0.3;
+        const dir = Math.random() > 0.5 ? 1 : -1;
+
+        this.angularVelocity = force * dir;
+        this.isSpinning = true;
     }
 
     /**
@@ -176,6 +192,15 @@ export class Wheel {
         this.ctx.textAlign = "center";
         this.ctx.textBaseline = "middle";
         this.ctx.fillText("GIRA", this.centerX, this.centerY);
+
+        // Draw Lock indicator if locked (optional visual feedback)
+        if (this.isLocked) {
+            this.ctx.beginPath();
+            this.ctx.arc(this.centerX, this.centerY, 32, 0, Math.PI * 2); // Slightly larger stroke
+            this.ctx.lineWidth = 2;
+            this.ctx.strokeStyle = "rgba(0,0,0,0.2)";
+            this.ctx.stroke();
+        }
     }
 
     animate() {
@@ -214,10 +239,23 @@ export class Wheel {
         // For simplicity, disable interaction while spinning
         if (this.isSpinning) return;
 
-        this.isDragging = true;
-
         const clientX = e.clientX !== undefined ? e.clientX : e.touches[0].clientX;
         const clientY = e.clientY !== undefined ? e.clientY : e.touches[0].clientY;
+
+        // Check for center click (Spin Button)
+        const rect = this.canvas.getBoundingClientRect();
+        const dx = clientX - rect.left - this.centerX;
+        const dy = clientY - rect.top - this.centerY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 30) { // 30 is radius of hub
+            this.spinAI();
+            return;
+        }
+
+        if (this.isLocked) return; // Prevent drag if locked
+
+        this.isDragging = true;
 
         this.lastMouseAngle = this.getAngleFromCenter(clientX, clientY);
         this.lastMouseTime = performance.now();
@@ -225,6 +263,21 @@ export class Wheel {
     }
 
     handleMove(e) {
+        // Mouse Hover for Cursor
+        if (!this.isDragging && !this.isSpinning) {
+            const cx = e.clientX !== undefined ? e.clientX : 0;
+            const cy = e.clientY !== undefined ? e.clientY : 0;
+
+            if (cx !== 0 || cy !== 0) {
+                const rect = this.canvas.getBoundingClientRect();
+                const dx = cx - rect.left - this.centerX;
+                const dy = cy - rect.top - this.centerY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                this.canvas.style.cursor = dist < 30 ? 'pointer' : 'grab';
+            }
+        }
+
         if (!this.isDragging) return;
 
         const clientX = e.clientX !== undefined ? e.clientX : e.center ? e.center.x : (e.touches ? e.touches[0].clientX : 0);
@@ -298,6 +351,7 @@ export class Wheel {
     }
 
     finishSpin() {
+        this.isLocked = true; // Lock wheel after spin logic finishes
         // Determine winner
         // Normalize angle to 0-2PI
         let normalized = this.angle % (Math.PI * 2);

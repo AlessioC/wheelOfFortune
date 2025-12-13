@@ -121,6 +121,9 @@ export class Game {
         this.canGuessConsonant = false;
         this.gameOver = false;
 
+        // Ensure wheel is unlocked for new round
+        this.wheel.unlock();
+
         // Reset keyboard
         this.resetKeyboard();
 
@@ -174,6 +177,7 @@ export class Game {
         this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
         this.updatePlayerDisplay();
         this.setMessage(`Tocca a ${this.currentPlayer.name}! Gira la ruota.`);
+        this.wheel.unlock(); // Allow next player to spin
     }
 
     // ========== KEYBOARD ==========
@@ -226,6 +230,9 @@ export class Game {
 
             if (this.mode === 'multi') {
                 setTimeout(() => this.nextPlayer(), 1500);
+            } else {
+                // In single player, unlock immediately to allow next spin
+                this.wheel.unlock();
             }
             return;
         } else if (segment.text === 'PASSA') {
@@ -235,6 +242,8 @@ export class Game {
 
             if (this.mode === 'multi') {
                 setTimeout(() => this.nextPlayer(), 1500);
+            } else {
+                this.wheel.unlock();
             }
             return;
         }
@@ -274,6 +283,11 @@ export class Game {
         this.canGuessConsonant = false;
         this.updateKeyboardState();
         this.checkWinConditions();
+
+        // Unlock wheel for next spin (if game not over)
+        if (!this.gameOver) {
+            this.wheel.unlock();
+        }
     }
 
     handleVowelClick(letter, btn) {
@@ -316,6 +330,8 @@ export class Game {
 
             if (this.mode === 'multi') {
                 setTimeout(() => this.nextPlayer(), 1500);
+            } else {
+                this.wheel.unlock();
             }
         }
     }

@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { initializeFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCeHSJTxWErGbOWW8v866mnaAaeNDiQhG0",
-    authDomain: "ruota-fad8a.firebaseapp.com",
-    projectId: "ruota-fad8a",
-    storageBucket: "ruota-fad8a.firebasestorage.app",
-    messagingSenderId: "277930860802",
-    appId: "1:277930860802:web:3be698784664dd6255e21b",
-    measurementId: "G-313ZX5F03T"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase with polling to avoid CORS/Socket issues on some networks

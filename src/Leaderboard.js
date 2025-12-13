@@ -41,20 +41,21 @@ export class Leaderboard {
      * @param {number} score - Score value
      * @param {string} mode - 'single' or 'multi'
      */
-    async saveScore(name, score, mode) {
+    async saveScore(name, score, mode, difficulty) {
         try {
             await addDoc(collection(db, this.collectionName), {
                 name: name.substring(0, 15),
                 score: score,
-                mode: mode, // Important for querying
+                mode: mode,
+                difficulty: difficulty || 'easy', // Default for robustness
                 date: new Date().toLocaleDateString('it-IT'),
-                timestamp: new Date() // For sorting/debugging
+                timestamp: new Date()
             });
             console.log("Score saved to Firestore");
             return true;
         } catch (e) {
             console.error("Error adding score: ", e);
-            return false;
+            throw e;
         }
     }
 

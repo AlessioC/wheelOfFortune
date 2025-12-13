@@ -411,7 +411,7 @@ export class Game {
             ? `Hai totalizzato ${winner.score} punti!`
             : `${winner.name} vince con ${winner.score} punti!`;
 
-        this.menu.showGameOver(message, winner.score, this.mode);
+        this.menu.showGameOver(message, winner.score, this.mode, this.difficulty);
 
         // Show buttons
         this.newGameBtn.style.display = 'block';

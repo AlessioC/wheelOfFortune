@@ -215,7 +215,7 @@ export class Menu {
         const tbody = document.getElementById('leaderboard-body');
         const noScoresMsg = document.getElementById('no-scores-msg');
 
-        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 20px;">Caricamento classifica...</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 20px;">Caricamento classifica...</td></tr>';
         noScoresMsg.style.display = 'none';
 
         try {
@@ -231,7 +231,7 @@ export class Menu {
 
             this.renderLeaderboardTable(scores);
         } catch (e) {
-            tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding: 20px; color: red;">Errore: ${e.message}<br>Controlla la console.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px; color: red;">Errore: ${e.message}<br>Controlla la console.</td></tr>`;
             console.error("Leaderboard error:", e);
             alert("Errore caricamento classifica: " + e.message);
         }
@@ -250,12 +250,15 @@ export class Menu {
 
         noScoresMsg.style.display = 'none';
 
+        const diffMap = { 'easy': 'Facile', 'medium': 'Media', 'hard': 'Difficile' };
+
         scores.slice(0, 10).forEach((entry, i) => {
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${i + 1}</td>
                 <td>${entry.name}</td>
                 <td>${entry.score}</td>
+                <td>${diffMap[entry.difficulty] || entry.difficulty || '-'}</td>
                 <td>${entry.date}</td>
             `;
             tbody.appendChild(row);
@@ -264,9 +267,10 @@ export class Menu {
 
     // ========== GAME OVER ==========
 
-    showGameOver(message, score, mode) {
+    showGameOver(message, score, mode, difficulty) {
         this.currentGameOverScore = score;
         this.currentGameOverMode = mode;
+        this.currentGameOverDifficulty = difficulty;
 
         document.getElementById('game-over-message').textContent = message;
         document.getElementById('winner-name').value = '';
@@ -287,7 +291,7 @@ export class Menu {
         btnSave.textContent = "Salvataggio...";
 
         try {
-            await this.leaderboard.saveScore(name, this.currentGameOverScore, this.currentGameOverMode);
+            await this.leaderboard.saveScore(name, this.currentGameOverScore, this.currentGameOverMode, this.currentGameOverDifficulty);
             alert("Punteggio salvato con successo!");
         } catch (e) {
             console.error(e);

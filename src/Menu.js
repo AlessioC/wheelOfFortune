@@ -206,13 +206,35 @@ export class Menu {
 
     // ========== LEADERBOARD ==========
 
-    switchLeaderboardTab(tab) {
+    async switchLeaderboardTab(tab) {
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.tab === tab);
         });
 
-        const scores = this.leaderboard.getScores(tab);
-        this.renderLeaderboardTable(scores);
+        // Show loading state
+        const tbody = document.getElementById('leaderboard-body');
+        const noScoresMsg = document.getElementById('no-scores-msg');
+
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 20px;">Caricamento classifica...</td></tr>';
+        noScoresMsg.style.display = 'none';
+
+        try {
+            // Timeout promise (10 seconds)
+            const timeoutPromise = new Promise((_, reject) =>
+                setTimeout(() => reject(new Error("Timeout: il server non risponde")), 10000)
+            );
+
+            const scores = await Promise.race([
+                this.leaderboard.getScores(tab),
+                timeoutPromise
+            ]);
+
+            this.renderLeaderboardTable(scores);
+        } catch (e) {
+            tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding: 20px; color: red;">Errore: ${e.message}<br>Controlla la console.</td></tr>`;
+            console.error("Leaderboard error:", e);
+            alert("Errore caricamento classifica: " + e.message);
+        }
     }
 
     renderLeaderboardTable(scores) {
@@ -253,10 +275,32 @@ export class Menu {
         this.gameOverModal.style.display = 'flex';
     }
 
-    saveScore() {
-        const name = document.getElementById('winner-name').value.trim() || 'Anonimo';
-        this.leaderboard.saveScore(name, this.currentGameOverScore, this.currentGameOverMode);
-        document.getElementById('save-score-form').style.display = 'none';
+    async saveScore() {
+        const nameInput = document.getElementById('winner-name');
+        const btnSave = document.getElementById('btn-save-score');
+
+        const name = nameInput.value.trim() || 'Anonimo';
+
+        // Disable UI
+        nameInput.disabled = true;
+        btnSave.disabled = true;
+        btnSave.textContent = "Salvataggio...";
+
+        try {
+            await this.leaderboard.saveScore(name, this.currentGameOverScore, this.currentGameOverMode);
+            alert("Punteggio salvato con successo!");
+        } catch (e) {
+            console.error(e);
+            alert("Errore salvataggio: " + e.message);
+        } finally {
+            // Hide form and show success feedback (optional, or just close)
+            document.getElementById('save-score-form').style.display = 'none';
+
+            // Re-enable for next time
+            nameInput.disabled = false;
+            btnSave.disabled = false;
+            btnSave.textContent = "SALVA PUNTEGGIO";
+        }
     }
 
     playAgain() {

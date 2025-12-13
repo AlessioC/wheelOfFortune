@@ -1,69 +1,67 @@
+import { db } from './firebaseConfig.js';
+import { collection, addDoc, query, where, orderBy, limit, getDocs } from "firebase/firestore";
+
 export class Leaderboard {
     constructor() {
-        this.STORAGE_KEY = 'wheel_of_fortune_leaderboard';
+        this.collectionName = 'scores';
     }
 
     /**
-     * Get all scores from localStorage
-     * @returns {Object} { single: [], multi: [] }
-     */
-    getAllScores() {
-        const data = localStorage.getItem(this.STORAGE_KEY);
-        if (!data) {
-            return { single: [], multi: [] };
-        }
-        try {
-            return JSON.parse(data);
-        } catch (e) {
-            console.error('Error parsing leaderboard data:', e);
-            return { single: [], multi: [] };
-        }
-    }
-
-    /**
-     * Get scores for a specific mode
+     * Get scores for a specific mode from Firestore
      * @param {string} mode - 'single' or 'multi'
-     * @returns {Array} Sorted scores (highest first)
+     * @returns {Promise<Array>} Sorted scores (highest first)
      */
-    getScores(mode) {
-        const allScores = this.getAllScores();
-        const scores = allScores[mode] || [];
-        return scores.sort((a, b) => b.score - a.score);
+    async getScores(mode) {
+        try {
+            // Simplified query to avoid need for composite index
+            const q = query(
+                collection(db, this.collectionName),
+                where("mode", "==", mode)
+            );
+
+            const querySnapshot = await getDocs(q);
+            const scores = [];
+            querySnapshot.forEach((doc) => {
+                scores.push(doc.data());
+            });
+
+            // Client-side sorting and limiting
+            return scores
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 20);
+        } catch (e) {
+            console.error("Error fetching scores: ", e);
+            throw e; // Propagate error to UI
+        }
     }
 
     /**
-     * Save a new score
+     * Save a new score to Firestore
      * @param {string} name - Player name
      * @param {number} score - Score value
      * @param {string} mode - 'single' or 'multi'
      */
-    saveScore(name, score, mode) {
-        const allScores = this.getAllScores();
-
-        const entry = {
-            name: name.substring(0, 15), // Max 15 chars
-            score: score,
-            date: new Date().toLocaleDateString('it-IT')
-        };
-
-        if (!allScores[mode]) {
-            allScores[mode] = [];
+    async saveScore(name, score, mode) {
+        try {
+            await addDoc(collection(db, this.collectionName), {
+                name: name.substring(0, 15),
+                score: score,
+                mode: mode, // Important for querying
+                date: new Date().toLocaleDateString('it-IT'),
+                timestamp: new Date() // For sorting/debugging
+            });
+            console.log("Score saved to Firestore");
+            return true;
+        } catch (e) {
+            console.error("Error adding score: ", e);
+            return false;
         }
-
-        allScores[mode].push(entry);
-
-        // Keep only top 50 scores per mode
-        allScores[mode] = allScores[mode]
-            .sort((a, b) => b.score - a.score)
-            .slice(0, 50);
-
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(allScores));
     }
 
     /**
-     * Clear all scores (for debugging)
+     * Clear all scores (Not supported via client for security reasons usually, but kept stub)
      */
     clearAll() {
-        localStorage.removeItem(this.STORAGE_KEY);
+        console.warn("Clear all not supported in online mode from client.");
     }
 }

@@ -284,7 +284,8 @@ export class Game {
 
     finalizeDiceRoll() {
         const roll = Math.floor(Math.random() * 6) + 1;
-        const value = roll * 500;
+        // Formula for ?500: roll determines thousands digit + 500 (e.g. 5 -> 5500)
+        const value = (roll * 1000) + 500;
 
         this.currentSegmentValue = value;
         this.canGuessConsonant = true;

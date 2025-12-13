@@ -12,7 +12,7 @@ export class Wheel {
                 { text: '200', value: 200, color: '#FFFF00', textColor: '#000' },     // Giallo
                 { text: '350', value: 350, color: '#FF69B4', textColor: '#000' },     // Rosa
                 { text: '100', value: 100, color: '#FF0000', textColor: '#fff' },     // Rosso
-                { text: '?', value: -2, color: '#1E90FF', textColor: '#fff' },        // Blu (Mystery)
+                { text: '?500', value: -2, color: '#1E90FF', textColor: '#fff' },        // Blu (Mystery)
                 { text: 'BANCAROTTA', value: 0, color: '#f0f0f0', textColor: '#000' }, // Bianco (ex Passa)
                 { text: '300', value: 300, color: '#FF00FF', textColor: '#fff' },     // Fucsia
                 { text: '150', value: 150, color: '#8B4513', textColor: '#fff' },     // Marrone
@@ -21,7 +21,7 @@ export class Wheel {
                 { text: '1000', value: 1000, color: '#87CEFA', textColor: '#000' },   // Celeste
                 { text: 'BANCAROTTA', value: 0, color: '#1a1a1a', textColor: '#fff' }, // Nero
                 { text: '200', value: 200, color: '#CD5C5C', textColor: '#fff' },     // Rosso scuro
-                { text: '?', value: -2, color: '#FFD700', textColor: '#000' },        // Oro (Mystery)
+                { text: '?500', value: -2, color: '#FFD700', textColor: '#000' },        // Oro (Mystery)
                 { text: '300', value: 300, color: '#FFC0CB', textColor: '#000' },     // Rosa
                 { text: '150', value: 150, color: '#FFA500', textColor: '#000' },     // Arancione
                 { text: '400', value: 400, color: '#90EE90', textColor: '#000' },     // Verde pallido
@@ -38,7 +38,7 @@ export class Wheel {
                 { text: '200', value: 200, color: '#FFFF00', textColor: '#000' },     // Giallo
                 { text: '350', value: 350, color: '#FF69B4', textColor: '#000' },     // Rosa
                 { text: '100', value: 100, color: '#FF0000', textColor: '#fff' },     // Rosso
-                { text: '?', value: -2, color: '#1E90FF', textColor: '#fff' },        // Blu (Mystery)
+                { text: '?500', value: -2, color: '#1E90FF', textColor: '#fff' },        // Blu (Mystery)
                 { text: 'PASSA', value: -1, color: '#f0f0f0', textColor: '#000' },    // Bianco
                 { text: '300', value: 300, color: '#FF00FF', textColor: '#fff' },     // Fucsia
                 { text: '150', value: 150, color: '#8B4513', textColor: '#fff' },     // Marrone
@@ -47,7 +47,7 @@ export class Wheel {
                 { text: '1000', value: 1000, color: '#87CEFA', textColor: '#000' },   // Celeste
                 { text: 'BANCAROTTA', value: 0, color: '#1a1a1a', textColor: '#fff' }, // Nero
                 { text: '200', value: 200, color: '#CD5C5C', textColor: '#fff' },     // Rosso scuro
-                { text: '?', value: -2, color: '#FFD700', textColor: '#000' },        // Oro (Mystery)
+                { text: '?500', value: -2, color: '#FFD700', textColor: '#000' },        // Oro (Mystery)
                 { text: '300', value: 300, color: '#FFC0CB', textColor: '#000' },     // Rosa
                 { text: '150', value: 150, color: '#FFA500', textColor: '#000' },     // Arancione
                 { text: '400', value: 400, color: '#90EE90', textColor: '#000' },     // Verde pallido

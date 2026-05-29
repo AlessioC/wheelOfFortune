@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rubrica — Dipartimento della Famiglia</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f5f4f0;--surface:#fff;--surface2:#f0ede8;
+  --border:rgba(0,0,0,0.09);--border2:rgba(0,0,0,0.17);
+  --text:#1a1a18;--text2:#5c5b57;--text3:#9b9991;
+  --accent:#1a5c9e;--accent-bg:#e8f0f9;--accent-text:#0c3d6e;
+  --r:10px;--shadow:0 1px 3px rgba(0,0,0,.07),0 4px 16px rgba(0,0,0,.04)
+}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.hdr{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 20px 0;position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.logo{width:40px;height:40px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo svg{width:20px;height:20px;fill:#fff}
+.hdr-title h1{font-size:16px;font-weight:600;letter-spacing:-.2px}
+.hdr-title p{font-size:11px;color:var(--text3);margin-top:1px}
+.pill{margin-left:auto;background:var(--accent-bg);color:var(--accent-text);font-size:12px;font-weight:600;padding:4px 11px;border-radius:20px;white-space:nowrap}
+.sw{position:relative}
+.si{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none}
+.si svg{width:16px;height:16px;display:block}
+#search{width:100%;padding:10px 38px;border:1.5px solid var(--border2);border-radius:8px;font-size:15px;color:var(--text);background:var(--surface2);outline:none;transition:border-color .15s,background .15s}
+#search:focus{border-color:var(--accent);background:var(--surface)}
+#search::placeholder{color:var(--text3)}
+.cb{position:absolute;right:9px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text3);padding:4px;border-radius:50%;display:none;align-items:center;justify-content:center}
+.cb svg{width:14px;height:14px;display:block}
+
+/* barra filtri servizio */
+.filters{display:flex;gap:3px;padding:10px 0 0;overflow-x:auto;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.fb{background:none;border:1px solid transparent;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:500;color:var(--text2);cursor:pointer;white-space:nowrap;transition:all .12s}
+.fb:hover{background:var(--surface2);border-color:var(--border2)}
+.fb.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* barra ordinamento */
+.sort-bar{display:flex;align-items:center;gap:3px;padding:6px 0 10px;overflow-x:auto;scrollbar-width:none}
+.sort-bar::-webkit-scrollbar{display:none}
+.sort-label{font-size:11px;color:var(--text3);white-space:nowrap;padding:0 6px 0 2px;flex-shrink:0}
+.sb{background:none;border:1px solid transparent;border-radius:20px;padding:3px 10px;font-size:11.5px;font-weight:500;color:var(--text2);cursor:pointer;white-space:nowrap;transition:all .12s;display:inline-flex;align-items:center;gap:4px}
+.sb:hover{background:var(--surface2);border-color:var(--border2)}
+.sb.active{background:var(--surface);border-color:var(--border2);color:var(--text);font-weight:600}
+.sb .arr{font-size:10px;opacity:.7}
+/* separatore tra sort buttons */
+.sort-sep{width:1px;height:14px;background:var(--border2);flex-shrink:0;margin:0 2px}
+
+.main{max-width:920px;margin:0 auto;padding:14px 14px 40px}
+.ib{font-size:12px;color:var(--text3);margin-bottom:10px;padding:0 2px;min-height:17px}
+.list{display:flex;flex-direction:column;gap:7px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:13px 15px;display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center;transition:border-color .12s,box-shadow .12s}
+.card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
+.av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;letter-spacing:.3px}
+.cb2{min-width:0}
+.cn{font-size:14px;font-weight:600;margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cm{font-size:11.5px;color:var(--text3);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tags{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.tag{font-size:10.5px;font-weight:500;padding:2px 7px;border-radius:20px}
+.tq{background:var(--accent-bg);color:var(--accent-text)}
+.td{background:#eeedfe;color:#3c3489}
+.ts{background:var(--surface2);color:var(--text2);border:1px solid var(--border2)}
+.ea{display:inline-block;font-size:11px;color:var(--accent);text-decoration:none;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px}
+.ea:hover{text-decoration:underline}
+.note-inline{font-size:11px;color:#92400e;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;display:flex;align-items:baseline;gap:4px}
+.note-inline::before{content:'✎';font-size:10px;flex-shrink:0}
+.cr{text-align:right;flex-shrink:0;min-width:72px}
+.in{font-size:21px;font-weight:700;color:var(--accent);letter-spacing:-.5px;line-height:1;margin-bottom:3px;font-variant-numeric:tabular-nums}
+.il{font-size:9.5px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px}
+.nd{font-size:11px;color:var(--text3);font-style:italic}
+.loc{font-size:10.5px;color:var(--text3);margin-top:2px}
+mark{background:#ffe566;color:inherit;border-radius:2px;padding:0 1px}
+.empty{text-align:center;padding:60px 20px;color:var(--text3)}
+.empty svg{width:44px;height:44px;margin-bottom:12px;opacity:.35;display:block;margin-left:auto;margin-right:auto}
+.empty h3{font-size:15px;color:var(--text2);margin-bottom:5px}
+@media(max-width:560px){
+  .card{grid-template-columns:38px 1fr}
+  .cr{display:none}
+  .ea{max-width:180px}
+}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="hdr-top">
+    <div class="logo"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 10H6v-1c0-2 4-3.1 6-3.1s6 1.1 6 3.1v1z"/></svg></div>
+    <div class="hdr-title"><h1>Rubrica Interna</h1><p>Dipartimento della Famiglia e delle Politiche Sociali — Regione Siciliana</p></div>
+    <div class="pill" id="pill">108 contatti</div>
+  </div>
+  <div class="sw">
+    <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    <input type="text" id="search" placeholder="Cerca per numero interno, nome, cognome, email..." autocomplete="off" spellcheck="false">
+    <button class="cb" id="cb" title="Cancella"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="filters" id="fbar"></div>
+  <div class="sort-bar" id="sbar"></div>
+</div>
+<div class="main">
+  <div class="ib" id="ib"></div>
+  <div class="list" id="list"></div>
+</div>
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  DATI RUBRICA — aggiornare questo blocco per cambiare i contatti ║
+  ║  Formato: array JSON di oggetti con i campi:                     ║
+  ║    cognome, nome, qualifica, interno, piano, stanza,             ║
+  ║    email, servizio_codice, servizio                              ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+<script type="application/json" id="rubrica-data">
+[
+  {
+    "cognome": "ALBANESE",
+    "nome": "Francesco",
+    "qualifica": "ASSISTENTE",
+    "interno": "74394",
+    "piano": "2",
+    "stanza": "1",
+    "email": "francesco.albanese@regione.sicilia.it",
+    "servizio_codice": "S2",
+    "servizio": "S.2 - Gestione interventi PO FESR",
+    "note": ""
+  },
+  {
+    "cognome": "AZZARELLO",
+    "nome": "Salvatore",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74243",
+    "piano": "6",
+    "stanza": "",
+    "email": "salvatore.azzarello@regione.sicilia.it",
+    "servizio_codice": "S3",
+    "servizio": "S.3 - Gestione FSE/POC - Immigrazione",
+    "note": ""
+  },
+  {
+    "cognome": "AZZARELLO",
+    "nome": "Sergio",
+    "qualifica": "ASSISTENTE",
+    "interno": "74116",
+    "piano": "2",
+    "stanza": "24",
+    "email": "s.azzarello@regione.sicilia.it",
+    "servizio_codice": "S3",
+    "servizio": "S.3 - Gestione FSE/POC - Immigrazione",
+    "note": ""
+  },
+  {
+    "cognome": "BAGLIONE",
+    "nome": "Emilio",
+    "qualifica": "ASSISTENTE",
+    "interno": "74109",
+    "piano": "8",
+    "stanza": "7",
+    "email": "emilio.baglione@regione.sicilia.it",
+    "servizio_codice": "S10",
+    "servizio": "S.10 - Servizi Generali",
+    "note": ""
+  },
+  {
+    "cognome": "BELLAVISTA",
+    "nome": "Carla",
+    "qualifica": "COADIUTORE",
+    "interno": "74120",
+    "piano": "14",
+    "stanza": "14",
+    "email": "carla.bellavista@regione.sicilia.it",
+    "servizio_codice": "dir",
+    "servizio": "Direzione Generale",
+    "note": ""
+  },
+  {
+    "cognome": "BELLOMO",
+    "nome": "Michela",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74690",
+    "piano": "2",
+    "stanza": "12",
+    "email": "michela.bellomo@regione.sicilia.it",
+    "servizio_codice": "S1",
+    "servizio": "S.1 - Programmazione POR FSE/FESR",
+    "note": ""
+  },
+  {
+    "cognome": "BENIGNO",
+    "nome": "Maria Pia",
+    "qualifica": "ASSISTENTE",
+    "interno": "74264",
+    "piano": "7",
+    "stanza": "10",
+    "email": "mp.benigno@regione.sicilia.it",
+    "servizio_codice": "S5",
+    "servizio": "S.5 - Ufficio Piano / Violenza di genere",
+    "note": ""
+  },
+  {
+    "cognome": "BIONDO",
+    "nome": "Nicolò",
+    "qualifica": "ASSISTENTE",
+    "interno": "74427",
+    "piano": "7",
+    "stanza": "15",
+    "email": "nbiondo@regione.sicilia.it",
+    "servizio_codice": "A",
+    "servizio": "Area Coordinamento",
+    "note": ""
+  },
+  {
+    "cognome": "BONGIORNO",
+    "nome": "Michela",
+    "qualifica": "DIRIGENTE",
+    "interno": "74485",
+    "piano": "6",
+    "stanza": "12",
+    "email": "mbongiorno@regione.sicilia.it",
+    "servizio_codice": "S3",
+    "servizio": "S.3 - Gestione FSE/POC - Immigrazione",
+    "note": ""
+  },
+  {
+    "cognome": "BOSCO",
+    "nome": "Clara",
+    "qualifica": "ASSISTENTE",
+    "interno": "74369",
+    "piano": "3",
+    "stanza": "11",
+    "email": "clara.bosco@regione.sicilia.it",
+    "servizio_codice": "S8",
+    "servizio": "S.8 - Politiche Famiglia e Giovanili",
+    "note": ""
+  },
+  {
+    "cognome": "BRANCATO",
+    "nome": "Loredana",
+    "qualifica": "ASSISTENTE",
+    "interno": "74402",
+    "piano": "6",
+    "stanza": "7",
+    "email": "loredana.brancato@regione.sicilia.it",
+    "servizio_codice": "S9",
+    "servizio": "S.9 - II.PP.A.B.",
+    "note": ""
+  },
+  {
+    "cognome": "BRANDI",
+    "nome": "Rosa",
+    "qualifica": "ASSISTENTE",
+    "interno": "74291",
+    "piano": "7",
+    "stanza": "5",
+    "email": "rosa.brandi@regione.sicilia.it",
+    "servizio_codice": "S5",
+    "servizio": "S.5 - Ufficio Piano / Violenza di genere",
+    "note": ""
+  },
+  {
+    "cognome": "BUCCAFUSCA",
+    "nome": "Rita",
+    "qualifica": "ASSISTENTE",
+    "interno": "74310",
+    "piano": "14",
+    "stanza": "10",
+    "email": "r.buccafusca@regione.sicilia.it",
+    "servizio_codice": "A",
+    "servizio": "Area Coordinamento",
+    "note": ""
+  },
+  {
+    "cognome": "BUSCEMI",
+    "nome": "Anna Paola",
+    "qualifica": "COADIUTORE",
+    "interno": "74702",
+    "piano": "14",
+    "stanza": "14",
+    "email": "annapaola.buscemi@regione.sicilia.it",
+    "servizio_codice": "dir",
+    "servizio": "Direzione Generale",
+    "note": ""
+  },
+  {
+    "cognome": "CAMPAGNA",
+    "nome": "Angelo",
+    "qualifica": "ASSISTENTE",
+    "interno": "74297",
+    "piano": "12",
+    "stanza": "17",
+    "email": "angelo.campagna@regione.sicilia.it",
+    "servizio_codice": "S7",
+    "servizio": "S.7 - Fragilità e Povertà",
+    "note": ""
+  },
+  {
+    "cognome": "CANALELLA",
+    "nome": "M. Antonietta",
+    "qualifica": "COADIUTORE",
+    "interno": "74681",
+    "piano": "3",
+    "stanza": "14",
+    "email": "mariaantonietta.canalella@regione.sicilia.it",
+    "servizio_codice": "A",
+    "servizio": "Area Coordinamento",
+    "note": ""
+  },
+  {
+    "cognome": "CANDELA",
+    "nome": "Rosario",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74280",
+    "piano": "2",
+    "stanza": "11",
+    "email": "rosario.candela@regione.sicilia.it",
+    "servizio_codice": "S3",
+    "servizio": "S.3 - Gestione FSE/POC - Immigrazione",
+    "note": ""
+  },
+  {
+    "cognome": "CANNONE",
+    "nome": "Giuseppe",
+    "qualifica": "ASSISTENTE",
+    "interno": "",
+    "piano": "2",
+    "stanza": "",
+    "email": "g.cannone@regione.sicilia.it",
+    "servizio_codice": "S1",
+    "servizio": "S.1 - Programmazione POR FSE/FESR",
+    "note": ""
+  },
+  {
+    "cognome": "CARRAMUSA",
+    "nome": "Salvatore",
+    "qualifica": "ASSISTENTE",
+    "interno": "74729",
+    "piano": "3",
+    "stanza": "8",
+    "email": "salvatore.carramusa@regione.sicilia.it",
+    "servizio_codice": "S8",
+    "servizio": "S.8 - Politiche Famiglia e Giovanili",
+    "note": ""
+  },
+  {
+    "cognome": "CASSANO",
+    "nome": "Giuseppa",
+    "qualifica": "ASSISTENTE",
+    "interno": "74192",
+    "piano": "1",
+    "stanza": "6",
+    "email": "p.cassano@regione.sicilia.it",
+    "servizio_codice": "S10",
+    "servizio": "S.10 - Servizi Generali",
+    "note": ""
+  },
+  {
+    "cognome": "CHISCI",
+    "nome": "M. Antonietta",
+    "qualifica": "ASSISTENTE",
+    "interno": "74342",
+    "piano": "12",
+    "stanza": "24",
+    "email": "ma.chisci@regione.sicilia.it",
+    "servizio_codice": "S7",
+    "servizio": "S.7 - Fragilità e Povertà",
+    "note": ""
+  },
+  {
+    "cognome": "CIANCIMINO",
+    "nome": "Michele",
+    "qualifica": "ASSISTENTE",
+    "interno": "74385",
+    "piano": "4",
+    "stanza": "17",
+    "email": "m.ciancimino@regione.sicilia.it",
+    "servizio_codice": "S6",
+    "servizio": "S.6 - Albi / RUNTS",
+    "note": ""
+  },
+  {
+    "cognome": "CIRAULO",
+    "nome": "Cinzia",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74234",
+    "piano": "12",
+    "stanza": "7b",
+    "email": "cinzia.ciraulo@regione.sicilia.it",
+    "servizio_codice": "S7",
+    "servizio": "S.7 - Fragilità e Povertà",
+    "note": ""
+  },
+  {
+    "cognome": "CIRRINCIONE",
+    "nome": "Sonia",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74169",
+    "piano": "4",
+    "stanza": "12",
+    "email": "sonia.cirrincione@regione.sicilia.it",
+    "servizio_codice": "S6",
+    "servizio": "S.6 - Albi / RUNTS",
+    "note": ""
+  },
+  {
+    "cognome": "CIULLO",
+    "nome": "Gioacchino",
+    "qualifica": "COADIUTORE",
+    "interno": "74352",
+    "piano": "7",
+    "stanza": "17",
+    "email": "g.ciullo@regione.sicilia.it",
+    "servizio_codice": "S10",
+    "servizio": "S.10 - Servizi Generali",
+    "note": ""
+  },
+  {
+    "cognome": "COCUZZA",
+    "nome": "Ernesto",
+    "qualifica": "ASSISTENTE",
+    "interno": "74374",
+    "piano": "2",
+    "stanza": "7",
+    "email": "ecocuzza@regione.sicilia.it",
+    "servizio_codice": "S2",
+    "servizio": "S.2 - Gestione interventi PO FESR",
+    "note": ""
+  },
+  {
+    "cognome": "COLLI",
+    "nome": "Georgia",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74336",
+    "piano": "2",
+    "stanza": "16",
+    "email": "georgia.colli@regione.sicilia.it",
+    "servizio_codice": "S1",
+    "servizio": "S.1 - Programmazione POR FSE/FESR",
+    "note": ""
+  },
+  {
+    "cognome": "COLOMBO",
+    "nome": "Daniela",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74235",
+    "piano": "8",
+    "stanza": "11",
+    "email": "d.colombo@regione.sicilia.it",
+    "servizio_codice": "S10",
+    "servizio": "S.10 - Servizi Generali",
+    "note": ""
+  },
+  {
+    "cognome": "COMPARETTO",
+    "nome": "Epifanio",
+    "qualifica": "ASSISTENTE",
+    "interno": "74326",
+    "piano": "2",
+    "stanza": "23",
+    "email": "epifanio.comparetto@regione.sicilia.it",
+    "servizio_codice": "S2",
+    "servizio": "S.2 - Gestione interventi PO FESR",
+    "note": ""
+  },
+  {
+    "cognome": "CONIGLIARO",
+    "nome": "Antonino",
+    "qualifica": "ASSISTENTE n.v.",
+    "interno": "74368",
+    "piano": "0",
+    "stanza": "17",
+    "email": "antonio.conigliaro@regione.sicilia.it",
+    "servizio_codice": "S10",
+    "servizio": "S.10 - Servizi Generali",
+    "note": ""
+  },
+  {
+    "cognome": "CONTESSA",
+    "nome": "Daniela",
+    "qualifica": "ASSISTENTE",
+    "interno": "74354",
+    "piano": "1",
+    "stanza": "1",
+    "email": "d.contessa@regione.sicilia.it",
+    "servizio_codice": "S4",
+    "servizio": "S.4 - Monitoraggio UE",
+    "note": ""
+  },
+  {
+    "cognome": "CORRAO",
+    "nome": "Alessio",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74353",
+    "piano": "7",
+    "stanza": "16",
+    "email": "alessio.corrao@regione.sicilia.it",
+    "servizio_codice": "A",
+    "servizio": "Area Coordinamento",
+    "note": "Cell. Servizio - 3358760639"
+  },
+  {
+    "cognome": "COSTANZO",
+    "nome": "Laura",
+    "qualifica": "ASSISTENTE",
+    "interno": "74457",
+    "piano": "2",
+    "stanza": "20",
+    "email": "l.costanzo@regione.sicilia.it",
+    "servizio_codice": "S3",
+    "servizio": "S.3 - Gestione FSE/POC - Immigrazione",
+    "note": ""
+  },
+  {
+    "cognome": "COSTANZO",
+    "nome": "Rita",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74285",
+    "piano": "7",
+    "stanza": "11",
+    "email": "r.costanzo@regione.sicilia.it",
+    "servizio_codice": "S5",
+    "servizio": "S.5 - Ufficio Piano / Violenza di genere",
+    "note": ""
+  },
+  {
+    "cognome": "CURALLO",
+    "nome": "Rosa",
+    "qualifica": "COADIUTORE",
+    "interno": "74220",
+    "piano": "2",
+    "stanza": "",
+    "email": "rosa.curallo@regione.sicilia.it",
+    "servizio_codice": "S1",
+    "servizio": "S.1 - Programmazione POR FSE/FESR",
+    "note": ""
+  },
+  {
+    "cognome": "CUSIMANO",
+    "nome": "Letizia",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74196",
+    "piano": "7",
+    "stanza": "13",
+    "email": "l.cusimano@regione.sicilia.it",
+    "servizio_codice": "S5",
+    "servizio": "S.5 - Ufficio Piano / Violenza di genere",
+    "note": ""
+  },
+  {
+    "cognome": "CUSIMANO",
+    "nome": "Rosa Maria",
+    "qualifica": "ASSISTENTE",
+    "interno": "74330",
+    "piano": "6",
+    "stanza": "6",
+    "email": "rosamaria.cusimano@regione.sicilia.it",
+    "servizio_codice": "S9",
+    "servizio": "S.9 - II.PP.A.B.",
+    "note": ""
+  },
+  {
+    "cognome": "DE MARCO",
+    "nome": "Maurizio",
+    "qualifica": "ASSISTENTE",
+    "interno": "74139",
+    "piano": "0",
+    "stanza": "3",
+    "email": "m.demarco@regione.sicilia.it",
+    "servizio_codice": "S10",
+    "servizio": "S.10 - Servizi Generali",
+    "note": ""
+  },
+  {
+    "cognome": "DELIA",
+    "nome": "Davide",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74261",
+    "piano": "2",
+    "stanza": "8",
+    "email": "d.delia@regione.sicilia.it",
+    "servizio_codice": "S2",
+    "servizio": "S.2 - Gestione interventi PO FESR",
+    "note": ""
+  },
+  {
+    "cognome": "DI FILIPPO",
+    "nome": "Giovanna",
+    "qualifica": "ASSISTENTE",
+    "interno": "74406",
+    "piano": "7",
+    "stanza": "14",
+    "email": "g.difilippo@regione.sicilia.it",
+    "servizio_codice": "S5",
+    "servizio": "S.5 - Ufficio Piano / Violenza di genere",
+    "note": ""
+  },
+  {
+    "cognome": "DI LIBERTI",
+    "nome": "M. Letizia",
+    "qualifica": "DIRIGENTE GENERALE",
+    "interno": "74433",
+    "piano": "14",
+    "stanza": "15",
+    "email": "marialetizia.diliberti@regione.sicilia.it",
+    "servizio_codice": "dir",
+    "servizio": "Direzione Generale",
+    "note": ""
+  },
+  {
+    "cognome": "DI MAGGIO",
+    "nome": "F. Maria",
+    "qualifica": "COADIUTORE",
+    "interno": "74147",
+    "piano": "1",
+    "stanza": "6",
+    "email": "fm.dimaggio@regione.sicilia.it",
+    "servizio_codice": "S10",
+    "servizio": "S.10 - Servizi Generali",
+    "note": ""
+  },
+  {
+    "cognome": "DI ROSA",
+    "nome": "Daniela",
+    "qualifica": "DIRIGENTE",
+    "interno": "74277",
+    "piano": "3",
+    "stanza": "15",
+    "email": "d.dirosa@regione.sicilia.it",
+    "servizio_codice": "S8",
+    "servizio": "S.8 - Politiche Famiglia e Giovanili",
+    "note": ""
+  },
+  {
+    "cognome": "FIORE",
+    "nome": "Massimiliano",
+    "qualifica": "ASSISTENTE",
+    "interno": "74256",
+    "piano": "12",
+    "stanza": "6",
+    "email": "m.fiore@regione.sicilia.it",
+    "servizio_codice": "S7",
+    "servizio": "S.7 - Fragilità e Povertà",
+    "note": ""
+  },
+  {
+    "cognome": "GALANTE",
+    "nome": "Massimo",
+    "qualifica": "COADIUTORE",
+    "interno": "74187",
+    "piano": "1",
+    "stanza": "3",
+    "email": "massimo.galante@regione.sicilia.it",
+    "servizio_codice": "S4",
+    "servizio": "S.4 - Monitoraggio UE",
+    "note": ""
+  },
+  {
+    "cognome": "GAMBINO",
+    "nome": "Rosa",
+    "qualifica": "ASSISTENTE",
+    "interno": "74253",
+    "piano": "4",
+    "stanza": "18",
+    "email": "rosa.gambino@regione.sicilia.it",
+    "servizio_codice": "S6",
+    "servizio": "S.6 - Albi / RUNTS",
+    "note": ""
+  },
+  {
+    "cognome": "GIACCONE",
+    "nome": "Antonio",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74453",
+    "piano": "8",
+    "stanza": "27",
+    "email": "antonio.giaccone@regione.sicilia.it",
+    "servizio_codice": "S10",
+    "servizio": "S.10 - Servizi Generali",
+    "note": ""
+  },
+  {
+    "cognome": "GIANNETTINO",
+    "nome": "Antonino",
+    "qualifica": "DIRIGENTE (f.f.)",
+    "interno": "74240",
+    "piano": "6",
+    "stanza": "8",
+    "email": "antonio.giannettino@regione.sicilia.it",
+    "servizio_codice": "S9",
+    "servizio": "S.9 - II.PP.A.B.",
+    "note": ""
+  },
+  {
+    "cognome": "GIOE'",
+    "nome": "Giovanni",
+    "qualifica": "ASSISTENTE",
+    "interno": "74148",
+    "piano": "1",
+    "stanza": "8",
+    "email": "g.gioe@regione.sicilia.it",
+    "servizio_codice": "S4",
+    "servizio": "S.4 - Monitoraggio UE",
+    "note": ""
+  },
+  {
+    "cognome": "GIOVANNELLI",
+    "nome": "Gennaro",
+    "qualifica": "DIRIGENTE",
+    "interno": "74365",
+    "piano": "8",
+    "stanza": "10",
+    "email": "gennaro.giovannelli@regione.sicilia.it",
+    "servizio_codice": "S10",
+    "servizio": "S.10 - Servizi Generali",
+    "note": ""
+  },
+  {
+    "cognome": "GRAZIANO",
+    "nome": "Tiziana Carmen",
+    "qualifica": "COADIUTORE",
+    "interno": "74246",
+    "piano": "14",
+    "stanza": "2",
+    "email": "tiziana.graziano@regione.sicilia.it",
+    "servizio_codice": "A",
+    "servizio": "Area Coordinamento",
+    "note": ""
+  },
+  {
+    "cognome": "GRISPO",
+    "nome": "Ignazio",
+    "qualifica": "ASSISTENTE n.v.",
+    "interno": "74367",
+    "piano": "0",
+    "stanza": "17",
+    "email": "",
+    "servizio_codice": "S10",
+    "servizio": "S.10 - Servizi Generali",
+    "note": ""
+  },
+  {
+    "cognome": "GUASTELLA",
+    "nome": "Felicia",
+    "qualifica": "DIRIGENTE",
+    "interno": "74255",
+    "piano": "7",
+    "stanza": "8",
+    "email": "licia.guastella@regione.sicilia.it",
+    "servizio_codice": "S5",
+    "servizio": "S.5 - Ufficio Piano / Violenza di genere",
+    "note": ""
+  },
+  {
+    "cognome": "GUZZO",
+    "nome": "Michele",
+    "qualifica": "ASSISTENTE",
+    "interno": "74707",
+    "piano": "1",
+    "stanza": "9",
+    "email": "m.guzzo@regione.sicilia.it",
+    "servizio_codice": "S4",
+    "servizio": "S.4 - Monitoraggio UE",
+    "note": ""
+  },
+  {
+    "cognome": "IMBESI",
+    "nome": "Gabriella",
+    "qualifica": "ASSISTENTE",
+    "interno": "74339",
+    "piano": "14",
+    "stanza": "1",
+    "email": "g.imbesi@regione.sicilia.it",
+    "servizio_codice": "A",
+    "servizio": "Area Coordinamento",
+    "note": ""
+  },
+  {
+    "cognome": "IMPASTATO",
+    "nome": "Fabrizio",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74259",
+    "piano": "4",
+    "stanza": "26",
+    "email": "fabrizio.impastato@regione.sicilia.it",
+    "servizio_codice": "S6",
+    "servizio": "S.6 - Albi / RUNTS",
+    "note": ""
+  },
+  {
+    "cognome": "IRACI",
+    "nome": "Felicia",
+    "qualifica": "ASSISTENTE",
+    "interno": "74348",
+    "piano": "8",
+    "stanza": "24",
+    "email": "f.iraci@regione.sicilia.it",
+    "servizio_codice": "S10",
+    "servizio": "S.10 - Servizi Generali",
+    "note": ""
+  },
+  {
+    "cognome": "LA GRASSA",
+    "nome": "Maria Linda",
+    "qualifica": "ASSISTENTE",
+    "interno": "74377",
+    "piano": "12",
+    "stanza": "12",
+    "email": "mlinda.lagrassa@regione.sicilia.it",
+    "servizio_codice": "S7",
+    "servizio": "S.7 - Fragilità e Povertà",
+    "note": ""
+  },
+  {
+    "cognome": "LA MILIA",
+    "nome": "Maria",
+    "qualifica": "COADIUTORE",
+    "interno": "74669",
+    "piano": "6",
+    "stanza": "25",
+    "email": "maria.lamilia@regione.sicilia.it",
+    "servizio_codice": "S9",
+    "servizio": "S.9 - II.PP.A.B.",
+    "note": ""
+  },
+  {
+    "cognome": "LO PRESTI",
+    "nome": "M. Antonella",
+    "qualifica": "COADIUTORE",
+    "interno": "74646",
+    "piano": "4",
+    "stanza": "19",
+    "email": "mariaantonella.lopresti@regione.sicilia.it",
+    "servizio_codice": "S6",
+    "servizio": "S.6 - Albi / RUNTS",
+    "note": ""
+  },
+  {
+    "cognome": "LUCCHESI",
+    "nome": "Daria",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74749",
+    "piano": "14",
+    "stanza": "10",
+    "email": "daria.lucchesi@regione.sicilia.it",
+    "servizio_codice": "A",
+    "servizio": "Area Coordinamento",
+    "note": ""
+  },
+  {
+    "cognome": "LUCIDO",
+    "nome": "Salvatore",
+    "qualifica": "ASSISTENTE",
+    "interno": "74718",
+    "piano": "7",
+    "stanza": "4",
+    "email": "s.lucido@regione.sicilia.it",
+    "servizio_codice": "S5",
+    "servizio": "S.5 - Ufficio Piano / Violenza di genere",
+    "note": ""
+  },
+  {
+    "cognome": "MALTESE",
+    "nome": "Concetta S.",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74333",
+    "piano": "12",
+    "stanza": "9",
+    "email": "concetta.maltese@regione.sicilia.it",
+    "servizio_codice": "S7",
+    "servizio": "S.7 - Fragilità e Povertà",
+    "note": ""
+  },
+  {
+    "cognome": "MAMMANO",
+    "nome": "Giuseppe",
+    "qualifica": "ASSISTENTE",
+    "interno": "74341",
+    "piano": "3",
+    "stanza": "10",
+    "email": "g.mammano@regione.sicilia.it",
+    "servizio_codice": "S8",
+    "servizio": "S.8 - Politiche Famiglia e Giovanili",
+    "note": ""
+  },
+  {
+    "cognome": "MANCINO",
+    "nome": "Gabriella",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74679",
+    "piano": "8",
+    "stanza": "9",
+    "email": "g.mancino@regione.sicilia.it",
+    "servizio_codice": "S10",
+    "servizio": "S.10 - Servizi Generali",
+    "note": ""
+  },
+  {
+    "cognome": "MANISCALCO",
+    "nome": "Giuseppe",
+    "qualifica": "FUNZIONARIO",
+    "interno": "",
+    "piano": "12",
+    "stanza": "",
+    "email": "",
+    "servizio_codice": "S7",
+    "servizio": "S.7 - Fragilità e Povertà",
+    "note": ""
+  },
+  {
+    "cognome": "MARANTO",
+    "nome": "Anna",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74199",
+    "piano": "14",
+    "stanza": "12",
+    "email": "a.maranto@regione.sicilia.it",
+    "servizio_codice": "dir",
+    "servizio": "Direzione Generale",
+    "note": ""
+  },
+  {
+    "cognome": "MIGLIORE",
+    "nome": "Maria Gabriella",
+    "qualifica": "ASSISTENTE",
+    "interno": "74209",
+    "piano": "1",
+    "stanza": "10",
+    "email": "mariagabriella.migliore@regione.sicilia.it",
+    "servizio_codice": "S4",
+    "servizio": "S.4 - Monitoraggio UE",
+    "note": ""
+  },
+  {
+    "cognome": "MILAZZO",
+    "nome": "Mariano",
+    "qualifica": "ASSISTENTE",
+    "interno": "74335",
+    "piano": "14",
+    "stanza": "2",
+    "email": "m.milazzo@regione.sicilia.it",
+    "servizio_codice": "A",
+    "servizio": "Area Coordinamento",
+    "note": ""
+  },
+  {
+    "cognome": "MIRAGLIA",
+    "nome": "Francesco Valerio",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74218",
+    "piano": "1",
+    "stanza": "11",
+    "email": "francesco.miraglia@regione.sicilia.it",
+    "servizio_codice": "S4",
+    "servizio": "S.4 - Monitoraggio UE",
+    "note": ""
+  },
+  {
+    "cognome": "MOCCIARO",
+    "nome": "Daniela",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74231",
+    "piano": "2",
+    "stanza": "6",
+    "email": "daniela.mocciaro@regione.sicilia.it",
+    "servizio_codice": "S2",
+    "servizio": "S.2 - Gestione interventi PO FESR",
+    "note": ""
+  },
+  {
+    "cognome": "MOSCATO",
+    "nome": "M. Franca",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74435",
+    "piano": "14",
+    "stanza": "7",
+    "email": "mariafranca.moscato@regione.sicilia.it",
+    "servizio_codice": "A",
+    "servizio": "Area Coordinamento",
+    "note": ""
+  },
+  {
+    "cognome": "MURATORE",
+    "nome": "Giovanni",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74123",
+    "piano": "2",
+    "stanza": "9",
+    "email": "giovanni.muratore@regione.sicilia.it",
+    "servizio_codice": "S1",
+    "servizio": "S.1 - Programmazione POR FSE/FESR",
+    "note": ""
+  },
+  {
+    "cognome": "NATOLI",
+    "nome": "Fabio",
+    "qualifica": "ASSISTENTE",
+    "interno": "74382",
+    "piano": "2",
+    "stanza": "16",
+    "email": "fabio.natoli@regione.sicilia.it",
+    "servizio_codice": "S1",
+    "servizio": "S.1 - Programmazione POR FSE/FESR",
+    "note": ""
+  },
+  {
+    "cognome": "NORRITO",
+    "nome": "Maurizio",
+    "qualifica": "FUNZIONARIO",
+    "interno": "",
+    "piano": "14",
+    "stanza": "2",
+    "email": "maurizio.norrito@regione.sicilia.it",
+    "servizio_codice": "A",
+    "servizio": "Area Coordinamento",
+    "note": ""
+  },
+  {
+    "cognome": "NOTARO",
+    "nome": "Giuseppe",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74210",
+    "piano": "7",
+    "stanza": "6",
+    "email": "giuseppe.notaro@regione.sicilia.it",
+    "servizio_codice": "S5",
+    "servizio": "S.5 - Ufficio Piano / Violenza di genere",
+    "note": ""
+  },
+  {
+    "cognome": "PACE",
+    "nome": "Marco",
+    "qualifica": "DIRIGENTE",
+    "interno": "74143",
+    "piano": "14",
+    "stanza": "9",
+    "email": "marco.pace@regione.sicilia.it",
+    "servizio_codice": "A",
+    "servizio": "Area Coordinamento",
+    "note": ""
+  },
+  {
+    "cognome": "PAPPALARDO",
+    "nome": "Concetta",
+    "qualifica": "COADIUTORE",
+    "interno": "74727",
+    "piano": "2",
+    "stanza": "3",
+    "email": "concetta.pappalardo@regione.sicilia.it",
+    "servizio_codice": "S2",
+    "servizio": "S.2 - Gestione interventi PO FESR",
+    "note": ""
+  },
+  {
+    "cognome": "PATTI",
+    "nome": "Francesca",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74293",
+    "piano": "3",
+    "stanza": "6",
+    "email": "francesca.patti@regione.sicilia.it",
+    "servizio_codice": "S8",
+    "servizio": "S.8 - Politiche Famiglia e Giovanili",
+    "note": ""
+  },
+  {
+    "cognome": "PATTI",
+    "nome": "Raffaella",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74298",
+    "piano": "3",
+    "stanza": "16",
+    "email": "raffaella.patti@regione.sicilia.it",
+    "servizio_codice": "S8",
+    "servizio": "S.8 - Politiche Famiglia e Giovanili",
+    "note": ""
+  },
+  {
+    "cognome": "PIAZZA",
+    "nome": "Andrea",
+    "qualifica": "FUNZIONARIO",
+    "interno": "",
+    "piano": "6",
+    "stanza": "",
+    "email": "andrea.piazza@regione.sicilia.it",
+    "servizio_codice": "S9",
+    "servizio": "S.9 - II.PP.A.B.",
+    "note": ""
+  },
+  {
+    "cognome": "PINTACUDA",
+    "nome": "Marco",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74354",
+    "piano": "1",
+    "stanza": "5",
+    "email": "marco.pintacuda@regione.sicilia.it",
+    "servizio_codice": "S4",
+    "servizio": "S.4 - Monitoraggio UE",
+    "note": ""
+  },
+  {
+    "cognome": "PROVENZANO",
+    "nome": "Serena",
+    "qualifica": "FUNZIONARIO",
+    "interno": "",
+    "piano": "7",
+    "stanza": "",
+    "email": "",
+    "servizio_codice": "S5",
+    "servizio": "S.5 - Ufficio Piano / Violenza di genere",
+    "note": ""
+  },
+  {
+    "cognome": "REALE",
+    "nome": "Guglielmo P.",
+    "qualifica": "DIRIGENTE",
+    "interno": "74393",
+    "piano": "12",
+    "stanza": "10",
+    "email": "guglielmo.reale@regione.sicilia.it",
+    "servizio_codice": "S7",
+    "servizio": "S.7 - Fragilità e Povertà",
+    "note": ""
+  },
+  {
+    "cognome": "RICHIUSA",
+    "nome": "Saverino",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74322",
+    "piano": "6",
+    "stanza": "18",
+    "email": "s.richiusa@regione.sicilia.it",
+    "servizio_codice": "S3",
+    "servizio": "S.3 - Gestione FSE/POC - Immigrazione",
+    "note": ""
+  },
+  {
+    "cognome": "ROMEO",
+    "nome": "Concetta",
+    "qualifica": "COADIUTORE",
+    "interno": "74651",
+    "piano": "7",
+    "stanza": "10",
+    "email": "c.romeo@regione.sicilia.it",
+    "servizio_codice": "S5",
+    "servizio": "S.5 - Ufficio Piano / Violenza di genere",
+    "note": ""
+  },
+  {
+    "cognome": "RUBINO",
+    "nome": "Agata",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74198",
+    "piano": "6",
+    "stanza": "16",
+    "email": "agata.rubino@regione.sicilia.it",
+    "servizio_codice": "S3",
+    "servizio": "S.3 - Gestione FSE/POC - Immigrazione",
+    "note": ""
+  },
+  {
+    "cognome": "RUSSO",
+    "nome": "Elisabetta",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74294",
+    "piano": "7",
+    "stanza": "11",
+    "email": "elisabetta.russo@regione.sicilia.it",
+    "servizio_codice": "S5",
+    "servizio": "S.5 - Ufficio Piano / Violenza di genere",
+    "note": ""
+  },
+  {
+    "cognome": "RUSSO",
+    "nome": "F.sca Benedetta",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74421",
+    "piano": "6",
+    "stanza": "13",
+    "email": "benedetta.russo@regione.sicilia.it",
+    "servizio_codice": "S9",
+    "servizio": "S.9 - II.PP.A.B.",
+    "note": ""
+  },
+  {
+    "cognome": "SAMPINO",
+    "nome": "Alessandro",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74344",
+    "piano": "2",
+    "stanza": "23",
+    "email": "alessandro.sampino@regione.sicilia.it",
+    "servizio_codice": "S3",
+    "servizio": "S.3 - Gestione FSE/POC - Immigrazione",
+    "note": ""
+  },
+  {
+    "cognome": "SANCARLO",
+    "nome": "Paolo",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74265",
+    "piano": "4",
+    "stanza": "25",
+    "email": "paolo.sancarlo@regione.sicilia.it",
+    "servizio_codice": "S6",
+    "servizio": "S.6 - Albi / RUNTS",
+    "note": ""
+  },
+  {
+    "cognome": "SCAGLIONE",
+    "nome": "Ilde",
+    "qualifica": "ASSISTENTE",
+    "interno": "74228",
+    "piano": "7",
+    "stanza": "7",
+    "email": "i.scaglione@regione.sicilia.it",
+    "servizio_codice": "S5",
+    "servizio": "S.5 - Ufficio Piano / Violenza di genere",
+    "note": ""
+  },
+  {
+    "cognome": "SCALA",
+    "nome": "Giuseppina",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74686",
+    "piano": "4",
+    "stanza": "14",
+    "email": "g.scala@regione.sicilia.it",
+    "servizio_codice": "S6",
+    "servizio": "S.6 - Albi / RUNTS",
+    "note": ""
+  },
+  {
+    "cognome": "SCELFO",
+    "nome": "Antonio",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74107",
+    "piano": "7",
+    "stanza": "9",
+    "email": "antonino.scelfo@regione.sicilia.it",
+    "servizio_codice": "S5",
+    "servizio": "S.5 - Ufficio Piano / Violenza di genere",
+    "note": ""
+  },
+  {
+    "cognome": "SCUDERI",
+    "nome": "Maria Cristina",
+    "qualifica": "ASSISTENTE",
+    "interno": "74424",
+    "piano": "7",
+    "stanza": "6",
+    "email": "mariacristina.scuderi@regione.sicilia.it",
+    "servizio_codice": "S5",
+    "servizio": "S.5 - Ufficio Piano / Violenza di genere",
+    "note": ""
+  },
+  {
+    "cognome": "SERRAO",
+    "nome": "Giovanna",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74281",
+    "piano": "2",
+    "stanza": "15",
+    "email": "giovanna.serrao@regione.sicilia.it",
+    "servizio_codice": "S1",
+    "servizio": "S.1 - Programmazione POR FSE/FESR",
+    "note": ""
+  },
+  {
+    "cognome": "SINATRA",
+    "nome": "Maurizio",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74451",
+    "piano": "2",
+    "stanza": "13",
+    "email": "maurizio.sinatra@regione.sicilia.it",
+    "servizio_codice": "S3",
+    "servizio": "S.3 - Gestione FSE/POC - Immigrazione",
+    "note": ""
+  },
+  {
+    "cognome": "SOTTILE",
+    "nome": "Maria Grazia",
+    "qualifica": "COADIUTORE",
+    "interno": "74328",
+    "piano": "6",
+    "stanza": "21",
+    "email": "mariagrazia.sottile@regione.sicilia.it",
+    "servizio_codice": "S3",
+    "servizio": "S.3 - Gestione FSE/POC - Immigrazione",
+    "note": ""
+  },
+  {
+    "cognome": "STANCANELLI",
+    "nome": "M. Fortunata",
+    "qualifica": "ASSISTENTE",
+    "interno": "74416",
+    "piano": "8",
+    "stanza": "23",
+    "email": "mariafortunata.stancanelli@regione.sicilia.it",
+    "servizio_codice": "S10",
+    "servizio": "S.10 - Servizi Generali",
+    "note": ""
+  },
+  {
+    "cognome": "SUTERA",
+    "nome": "Antonella",
+    "qualifica": "DIRIGENTE",
+    "interno": "74431",
+    "piano": "2",
+    "stanza": "4",
+    "email": "asutera@regione.sicilia.it",
+    "servizio_codice": "S2",
+    "servizio": "S.2 - Gestione interventi PO FESR",
+    "note": ""
+  },
+  {
+    "cognome": "TERRASINI",
+    "nome": "Michele",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74497",
+    "piano": "3",
+    "stanza": "5",
+    "email": "michele.terrasini@regione.sicilia.it",
+    "servizio_codice": "S8",
+    "servizio": "S.8 - Politiche Famiglia e Giovanili",
+    "note": ""
+  },
+  {
+    "cognome": "TORNABENE",
+    "nome": "Giovanna",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74130",
+    "piano": "3",
+    "stanza": "13",
+    "email": "giovanna.tornabene@regione.sicilia.it",
+    "servizio_codice": "S8",
+    "servizio": "S.8 - Politiche Famiglia e Giovanili",
+    "note": ""
+  },
+  {
+    "cognome": "TRANCHIDA",
+    "nome": "Roberto",
+    "qualifica": "ASSISTENTE",
+    "interno": "74251",
+    "piano": "2",
+    "stanza": "22",
+    "email": "r.tranchida@regione.sicilia.it",
+    "servizio_codice": "S3",
+    "servizio": "S.3 - Gestione FSE/POC - Immigrazione",
+    "note": ""
+  },
+  {
+    "cognome": "VAIANA",
+    "nome": "Giuseppa",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74652",
+    "piano": "2",
+    "stanza": "10",
+    "email": "gvaiana@regione.sicilia.it",
+    "servizio_codice": "S3",
+    "servizio": "S.3 - Gestione FSE/POC - Immigrazione",
+    "note": ""
+  },
+  {
+    "cognome": "VANNINI",
+    "nome": "Antonino",
+    "qualifica": "FUNZIONARIO",
+    "interno": "74190",
+    "piano": "2",
+    "stanza": "5",
+    "email": "avannini@regione.sicilia.it",
+    "servizio_codice": "S2",
+    "servizio": "S.2 - Gestione interventi PO FESR",
+    "note": ""
+  },
+  {
+    "cognome": "VENANZIO",
+    "nome": "Francesca",
+    "qualifica": "ASSISTENTE",
+    "interno": "74747",
+    "piano": "3",
+    "stanza": "7",
+    "email": "f.venanzio@regione.sicilia.it",
+    "servizio_codice": "S8",
+    "servizio": "S.8 - Politiche Famiglia e Giovanili",
+    "note": ""
+  },
+  {
+    "cognome": "ZARBO",
+    "nome": "Annalisa",
+    "qualifica": "ASSISTENTE",
+    "interno": "74139",
+    "piano": "0",
+    "stanza": "3",
+    "email": "annalisa.zarbo@regione.sicilia.it",
+    "servizio_codice": "S10",
+    "servizio": "S.10 - Servizi Generali",
+    "note": ""
+  },
+  {
+    "cognome": "ZUMMO",
+    "nome": "Antonella",
+    "qualifica": "ASSISTENTE",
+    "interno": "74423",
+    "piano": "3",
+    "stanza": "9",
+    "email": "antonella.zummo@regione.sicilia.it",
+    "servizio_codice": "S8",
+    "servizio": "S.8 - Politiche Famiglia e Giovanili",
+    "note": ""
+  }
+]
+</script>
+<script>
+const C=JSON.parse(document.getElementById("rubrica-data").textContent);
+const AV=[
+  {bg:'#dbeafe',t:'#1e3a8a'},{bg:'#dcfce7',t:'#14532d'},{bg:'#ede9fe',t:'#3b0764'},
+  {bg:'#fef9c3',t:'#713f12'},{bg:'#fce7f3',t:'#831843'},{bg:'#ffedd5',t:'#7c2d12'},
+  {bg:'#d1fae5',t:'#064e3b'},{bg:'#e0e7ff',t:'#312e81'},{bg:'#fef2f2',t:'#7f1d1d'},
+];
+const SO=['dir','A','S1','S2','S3','S4','S5','S6','S7','S8','S9','S10'];
+const SL={dir:'Direzione',A:'Area',S1:'S.1',S2:'S.2',S3:'S.3',S4:'S.4',S5:'S.5',S6:'S.6',S7:'S.7',S8:'S.8',S9:'S.9',S10:'S.10'};
+const IS_DIR=['DIRIGENTE GENERALE','DIRIGENTE','DIRIGENTE (f.f.)'];
+
+// ─── GERARCHIA QUALIFICHE ────────────────────────────────────────
+// Ordine gerarchico decrescente: 0 = massimo grado
+const QUAL_RANK={
+  'DIRIGENTE GENERALE':0,
+  'DIRIGENTE':1,
+  'DIRIGENTE (f.f.)':2,
+  'FUNZIONARIO':3,
+  'ASSISTENTE':4,
+  'ASSISTENTE n.v.':5,
+  'COADIUTORE':6
+};
+function qualRank(q){ return QUAL_RANK[q]??99; }
+
+// ─── STATO ───────────────────────────────────────────────────────
+let af='all', sv='';
+
+// sort: { key, dir }
+// key: 'cognome' | 'qualifica' | 'piano' | 'servizio'
+// dir: 'asc' | 'desc'
+// Per qualifica: asc = dal più alto in gerarchia; per piano: asc = piano più basso
+let sort={ key:'cognome', dir:'asc' };
+
+// ─── SORT CONFIGS ────────────────────────────────────────────────
+// Definizione dei pulsanti di sort disponibili per contesto
+// 'always': visibile sempre; 'all-only': solo quando filtro=Tutti
+const SORT_DEFS=[
+  { key:'cognome',  label:'A→Z',       labelDesc:'Z→A',       always:true,     title:'Ordina per cognome'},
+  { key:'qualifica',label:'Qualifica ↑',labelDesc:'Qualifica ↓',always:true,    title:'Ordina per gerarchia (Dirigente → Coadiutore / viceversa)'},
+  { key:'piano',    label:'Piano ↑',    labelDesc:'Piano ↓',   always:true,     title:'Ordina per piano (crescente / decrescente)'},
+  { key:'servizio', label:'Servizio',   labelDesc:'Servizio',  always:false,    title:'Ordina per servizio (solo vista Tutti)'},
+];
+
+// ─── FILTRI SERVIZIO ─────────────────────────────────────────────
+const fb=document.getElementById('fbar');
+function mkFBtn(f,label,title){
+  const b=document.createElement('button');
+  b.className='fb'+(f==='all'?' active':'');
+  b.textContent=label; b.dataset.f=f;
+  if(title) b.title=title;
+  fb.appendChild(b);
+}
+mkFBtn('all','Tutti');
+SO.forEach(code=>{
+  if(!C.some(c=>c.servizio_codice===code))return;
+  const sample=C.find(c=>c.servizio_codice===code);
+  mkFBtn(code,SL[code]||code,sample?.servizio||'');
+});
+fb.addEventListener('click',e=>{
+  const b=e.target.closest('.fb');if(!b)return;
+  af=b.dataset.f;
+  document.querySelectorAll('.fb').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  // se il sort corrente è 'servizio' e si passa a un filtro specifico, torna a cognome
+  if(sort.key==='servizio'&&af!=='all'){ sort={key:'cognome',dir:'asc'}; }
+  buildSortBar();
+  render();
+});
+
+// ─── BARRA ORDINAMENTO ───────────────────────────────────────────
+const sbar=document.getElementById('sbar');
+
+function buildSortBar(){
+  sbar.innerHTML='';
+  const lbl=document.createElement('span');
+  lbl.className='sort-label';
+  lbl.textContent='Ordina:';
+  sbar.appendChild(lbl);
+
+  SORT_DEFS.forEach((def,i)=>{
+    // 'servizio' visibile solo con filtro Tutti
+    if(!def.always && af!=='all') return;
+
+    // separatore prima del gruppo "servizio" (solo se presente)
+    if(!def.always && af==='all'){
+      const sep=document.createElement('div');
+      sep.className='sort-sep';
+      sbar.appendChild(sep);
+    }
+
+    const isActive=sort.key===def.key;
+    const isDesc=isActive&&sort.dir==='desc';
+    const b=document.createElement('button');
+    b.className='sb'+(isActive?' active':'');
+    b.title=def.title;
+    b.dataset.k=def.key;
+    b.innerHTML=isActive
+      ? (isDesc ? def.labelDesc : def.label)+' <span class="arr">'+(isDesc?'▼':'▲')+'</span>'
+      : def.label;
+    sbar.appendChild(b);
+  });
+
+  sbar.addEventListener('click',e=>{
+    const b=e.target.closest('.sb');if(!b)return;
+    const k=b.dataset.k;
+    if(sort.key===k){
+      sort.dir=sort.dir==='asc'?'desc':'asc';
+    } else {
+      // default dir per ogni chiave
+      sort={ key:k, dir:'asc' };
+    }
+    buildSortBar();
+    render();
+  });
+}
+
+// ─── FUNZIONE DI SORT ────────────────────────────────────────────
+function sortContacts(arr){
+  const mult=sort.dir==='asc'?1:-1;
+  return [...arr].sort((a,b)=>{
+    switch(sort.key){
+      case 'cognome':
+        return mult*(a.cognome.localeCompare(b.cognome,'it')||a.nome.localeCompare(b.nome,'it'));
+      case 'qualifica':{
+        const diff=qualRank(a.qualifica)-qualRank(b.qualifica);
+        // a parità di qualifica, secondario per cognome sempre asc
+        return mult*diff || a.cognome.localeCompare(b.cognome,'it');
+      }
+      case 'piano':{
+        const pa=parseInt(a.piano)||0, pb=parseInt(b.piano)||0;
+        return mult*(pa-pb) || a.cognome.localeCompare(b.cognome,'it');
+      }
+      case 'servizio':{
+        // ordine canonico dei servizi (SO), poi cognome
+        const sa=SO.indexOf(a.servizio_codice), sb2=SO.indexOf(b.servizio_codice);
+        const si=(sa===-1?99:sa)-(sb2===-1?99:sb2);
+        return mult*si || a.cognome.localeCompare(b.cognome,'it');
+      }
+      default:
+        return 0;
+    }
+  });
+}
+
+// ─── RICERCA ─────────────────────────────────────────────────────
+const se=document.getElementById('search'),cbtn=document.getElementById('cb');
+se.addEventListener('input',()=>{sv=se.value.trim();cbtn.style.display=sv?'flex':'none';render();});
+cbtn.addEventListener('click',()=>{se.value='';sv='';cbtn.style.display='none';se.focus();render();});
+
+function hl(t,q){
+  if(!q)return String(t);
+  return String(t).replace(new RegExp(q.replace(/[-[\]{}()*+?.,\\^$|#\s]/g,'\\$&'),'gi'),m=>`<mark>${m}</mark>`);
+}
+
+// ─── RENDER ──────────────────────────────────────────────────────
+function render(){
+  const q=sv.toLowerCase();
+  let f=C.filter(c=>{
+    if(af!=='all'&&c.servizio_codice!==af)return false;
+    if(!q)return true;
+    return (c.interno&&c.interno.includes(q))||
+           c.cognome.toLowerCase().includes(q)||
+           c.nome.toLowerCase().includes(q)||
+           (c.email&&c.email.toLowerCase().includes(q))||
+           (c.servizio&&c.servizio.toLowerCase().includes(q));
+  });
+
+  f=sortContacts(f);
+
+  document.getElementById('ib').textContent=
+    f.length===C.length?`${C.length} contatti`:`${f.length} risultat${f.length===1?'o':'i'} su ${C.length}`;
+  document.getElementById('pill').textContent=f.length+' contatti';
+  const list=document.getElementById('list');
+  if(!f.length){
+    list.innerHTML=`<div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg><h3>Nessun risultato</h3><p>Nessun contatto per "${sv}"</p></div>`;
+    return;
+  }
+  list.innerHTML=f.map((c,i)=>{
+    // colore avatar basato sull'indice originale per coerenza visiva
+    const origIdx=C.indexOf(c);
+    const av=AV[origIdx%AV.length];
+    const ini=((c.cognome[0]||'')+(c.nome[0]||'')).toUpperCase();
+    const isDir=IS_DIR.includes(c.qualifica);
+    const pianoNum=parseInt(c.piano);
+    const loc=[(!isNaN(pianoNum)&&pianoNum>=0)?`Piano ${c.piano}`:'',c.stanza?`St. ${c.stanza}`:''].filter(Boolean).join(' · ');
+    return `<div class="card">
+      <div class="av" style="background:${av.bg};color:${av.t}">${ini}</div>
+      <div class="cb2">
+        <div class="cn">${hl(c.cognome,sv)} ${hl(c.nome,sv)}</div>
+        <div class="cm">${c.servizio||'—'}</div>
+        <div class="tags">
+          <span class="tag ${isDir?'td':'tq'}">${c.qualifica}</span>
+        </div>
+        ${c.email?`<a href="mailto:${c.email}" class="ea">${hl(c.email,sv)}</a>`:''}
+        ${c.note&&c.note.trim()?`<div class="note-inline" title="${c.note.trim().replace(/"/g,'&quot;')}">${hl(c.note.trim(),sv)}</div>`:''}
+      </div>
+      <div class="cr">
+        ${c.interno
+          ?`<div class="in">${hl(c.interno,sv)}</div><div class="il">interno</div>`
+          :`<div class="nd">n/d</div>`}
+        ${loc?`<div class="loc">${loc}</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ─── AVVIO ───────────────────────────────────────────────────────
+buildSortBar();
+render();
+</script>
+</body>
+</html>
